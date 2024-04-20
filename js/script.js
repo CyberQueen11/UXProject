@@ -36,3 +36,41 @@ async function getBooksBySubject(subject) {
 }
 
 getBooksBySubject('fiction')
+
+const textToSearch = "is this for real?";
+
+async function getBooksText(text) {
+    console.log("getBookToSearch() is called")
+    const LIMIT = 5
+    let resp = await fetch(`https://openlibrary.org/search/inside.json?q="${textToSearch}"&limit=${LIMIT}`)
+    let json = await resp.json()
+
+    let bookTextList = []
+
+    if (resp.ok) {
+        console.log("Fetching text data from books...")
+
+        // Check if json.hits exists before accessing its properties
+        if (json.hits && json.hits.hits) {
+            for (let i = 0; i < LIMIT; i++) {
+                let title = json.hits.hits[i].fields.meta_title[0];
+
+                if (bookTextList.includes(title)) {
+                    continue;
+                } else {
+                    bookTextList.push(title);
+                    console.log(title);
+
+                }
+            }
+        } else {
+            console.log("No hits found in the response.");
+        }
+
+        console.log(bookTextList.length + " books found with the text '" + textToSearch + "'");
+    } else {
+        console.log(resp.statusText)
+    }
+}
+
+getBooksText(textToSearch);
