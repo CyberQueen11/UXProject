@@ -27,12 +27,7 @@ async function getBookByTime(time) {
             }
 
             // Process each book in the current response
-            for (const element of json.docs) {
-                let subjects = element.subject;
-                for (const subElement of subjects) {
-                    subjectSet.add(subElement); // Add each subject to the Set
-                }
-            }
+            processSubject(json, subjectSet);
 
             // Increment the offset for the next request
             offset += LIMIT;
@@ -79,12 +74,12 @@ async function checkObject(object){
 
 const objectTest = "book";
 
-if(checkObject(objectTest)){ //If the word is found then look for books
+if(checkObject(objectTest)){ //If the word is found then look for the books
     getBookByObject(timeTest, objectTest)
 }
 
 async function getBookByObject(time, object){
-    let subjectSet = new Set(); // Use a Set to store unique subjects
+    let placeSet = new Set(); // Use a Set to store unique subjects
 
     const LIMIT = 100;
     let offset = 0;
@@ -111,12 +106,7 @@ async function getBookByObject(time, object){
             }
 
             // Process each book in the current response
-            for (const element of json.docs) {
-                let subjects = element.subject;
-                for (const subElement of subjects) {
-                    subjectSet.add(subElement); // Add each subject to the Set
-                }
-            }
+            processPlace(json, placeSet);
 
             // Increment the offset for the next request
             offset += LIMIT;
@@ -129,9 +119,30 @@ async function getBookByObject(time, object){
     } while (offset < numFound); // Continue fetching until we've retrieved all books
 
     // Convert the Set back to an array if needed
-    let subjectList = [...subjectSet];
-    console.log(subjectList);
-    return subjectList;
+    let placeList = [...placeSet];
+    console.log(placeList);
+    return placeList;
+}
+
+
+function processSubject(json, subjectSet) {
+    for (const element of json.docs) {
+        let subjects = element.subject;
+        for (const subElement of subjects) {
+            subjectSet.add(subElement); //Add each subject to the list
+        }
+    }
+}
+
+function processPlace(json, placeSet) {
+    for (const element of json.docs) {
+        if (element.place && Array.isArray(element.place)) {
+            let places = element.place;
+            for (const placeElement of places) {
+                placeSet.add(placeElement); //Add each place to the list
+            }
+        }
+    }
 }
 
 
@@ -143,12 +154,7 @@ async function getBookByObject(time, object){
 
 
 
-
-
-
-
 async function getBookByPlace(place){}
-
 
 async function getBookByChoices(time, object, place) {
     const LIMIT = 100;
