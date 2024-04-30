@@ -16,40 +16,37 @@
 
     <main>
 
-        <form id="story-form" action="">
-            <div id="era-container">
+        <form id="story_form" action="">
+            <div id="era_container">
                 <label for="era">Once upon a time in the era of</label>
-                <select name="era" id="era-menu">
-
+                <select name="era" id="era_menu">
                 </select> <br>
             </div>
-    
+
             <!-- If thing exists in our subjectList then show only those subjects -->
-            <div id="thing-container">
+            <div id="thing_container">
                 <label for="thing">There was a</label>
-                <select name="thing" id="thing-menu">
-
+                <select name="thing" id="thing_menu">
                 </select> <br>
             </div>
-    
-            <div id="place-container">
-                <label for="place">who lived in</label>
-                <select name="place" id="place-menu">
 
+            <div id="place_container">
+                <label for="place">who lived in</label>
+                <select name="place" id="place_menu">
+                    <option value="asia">Asia</option>
+                    <option value="istanbul">Istanbul</option>
                 </select><br>
             </div>
-    
-            <div id="filler-container">
-                xxxxxxxxxxxxxxxxxxxxxxxxxx <br>
-                xxxxxxxxxxxxxxxxxxxxxxxxxx <br>
-                xxxxxxxxxxxxxxxxxxxxxxxxxx <br>
-                xxxxxxxxxxxxxxxxxxxxxxxxxx <br>
+
+            <div id="filler_container">
             </div>
-    
-            <div id="button-container">
-                <input type="submit" value="Reveal the book">
-            </div>
+
+            <input type="submit" value="Reveal the book">
         </form>
+
+        <div id="card-container" class="card-container">
+            <!-- Cards will be dynamically added here -->
+        </div>
     </main>
 
     <footer>
