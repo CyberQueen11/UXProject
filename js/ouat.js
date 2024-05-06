@@ -1,14 +1,19 @@
 const openlibraryUrl = "https://openlibrary.org/search.json?"
 
+// Global variable to store fetched books
+// This array is needed for the checkObjects function. We want to be able to check if the list is empty or not.
+let fetchedBooks = {};
+
 // Function to fetch data from Open Library
 async function fetchData(time, object, place, processFunction) {
     const LIMIT = 1000;
     let offset = 0;
     let numFound = 0;
-    
+    let maxSearchNum = 5000;
+
     do {
         console.log(`Fetching data from Open Library with offset: ${offset}`);
-        
+
         // Construct the URL based on parameters
         let url = `${openlibraryUrl}time=${time}&language=eng&limit=${LIMIT}&offset=${offset}`;
         if (object) {
@@ -17,11 +22,11 @@ async function fetchData(time, object, place, processFunction) {
         if (place) {
             url += `&place=${place}`;
         }
-        
+
         // Make the fetch request with the current offset
         let resp = await fetch(url);
         let json = await resp.json();
-        
+
         // Check if the response is ok
         if (resp.ok) {
             numFound = json.numFound;
@@ -31,10 +36,15 @@ async function fetchData(time, object, place, processFunction) {
                 console.log("No items found");
                 return; // Exit the function if no items are found
             }
-            
+
+            if (numFound < maxSearchNum) {
+                maxSearchNum = numFound
+            }
+
+            //Since different fetches use different process methods we fetch the limbda functions that are sent in asan argument
             // Process each item in the current response
             processFunction(json);
-            
+
             // Increment the offset for the next request
             offset += LIMIT;
         } else {
@@ -42,26 +52,7 @@ async function fetchData(time, object, place, processFunction) {
             return; // Exit the function if there's an error
         }
 
-    } while (offset < 5000); // Continue fetching until we've retrieved all items
-}
-
-// Global variable to store fetched books
-let fetchedBooks = {};
-
-async function fetchBooksByTime(time) {
-    const functionName = fetchBooksByTime.name;
-    console.log(`${functionName} is called and running...`);
-
-    if (!fetchedBooks[time]) {
-        let subjectSet = new Set();
-
-        await fetchData(time, null, "", json => processList(json, subjectSet, true))
-            .catch(json => handleFetchError(json, functionName));
-
-        fetchedBooks[time] = [...subjectSet];
-    }
-
-    return fetchedBooks[time];
+    } while (offset < maxSearchNum); // Continue fetching until we've retrieved all items
 }
 
 // Helper function to handle errors and log messages
@@ -70,44 +61,8 @@ function handleFetchError(json, functionName) {
     console.log(`Shutting down ${functionName} program...`);
 }
 
-async function getBookByObject(time, object) {
-    const functionName = getBookByObject.name;
-    console.log(`${functionName} is called and running...`);
-
-    let placeSet = new Set();
-
-    await fetchData(time, object, "", json => processList(json, false, placeSet))
-        .catch(json => handleFetchError(json, functionName));
-
-    console.log([...placeSet]); // Print out places
-    return [...placeSet];
-}
-
-async function getBookByPlace(time, object, place) {
-    const functionName = getBookByPlace.name;
-    console.log(`${functionName} is called and running...`);
-
-    await fetchData(time, object, place, processBooks)
-        .catch(json => handleFetchError(json, functionName));
-}
-
-function processBooks(json) {
-    let cardContainer = document.getElementById("card-container");
-    cardContainer.innerHTML = "";
-
-    // Process each book in the current response
-    for (const element of json.docs) {
-        createCard(
-            cardContainer,
-            element.title,
-            element.author_name ? element.author_name[0] : "Unknown",
-            element.isbn ? element.isbn[0] : "Unknown",
-            element.publish_year ? element.publish_year[0] : "Unknown"
-        );
-    }
-}
-
 async function checkObject(object, time) {
+    //Here we search for the word/subject that the user selected in the drop down menu(man, woman, cat....)
     let searchWord = new RegExp(`\\b${object}\\b`, 'i'); // Use RegExp constructor to create regex(regular expression)
 
     try {
@@ -136,6 +91,26 @@ async function checkObject(object, time) {
     }
 }
 
+//Print out book here
+function processBooks(json) {
+    let cardContainer = document.getElementById("card-container");
+    cardContainer.innerHTML = "";
+
+    let numFound = json.numFound;
+    let randomNum = Math.floor(Math.random() * numFound);
+
+    // Process each book in the current response
+    for (const element of json.docs) {
+        createCard(
+            cardContainer,
+            element.title,
+            element.author_name ? element.author_name[0] : "Unknown",
+            element.isbn ? element.isbn[0] : "Unknown",
+            element.publish_year ? element.publish_year[0] : "Unknown"
+        );
+    }
+}
+
 async function processList(json, subjectSet, placeSet) {
 
     if (subjectSet) {
@@ -161,6 +136,43 @@ async function processList(json, subjectSet, placeSet) {
 
 }
 
+async function fetchBooksByTime(time) {
+    const functionName = fetchBooksByTime.name;
+    console.log(`${functionName} is called and running...`);
+
+    if (!fetchedBooks[time]) {
+        let subjectSet = new Set();
+
+        await fetchData(time, null, "", json => processList(json, subjectSet, true))
+            .catch(json => handleFetchError(json, functionName));
+
+        fetchedBooks[time] = [...subjectSet];
+    }
+
+    return fetchedBooks[time];
+}
+
+async function getBookByObject(time, object) {
+    const functionName = getBookByObject.name;
+    console.log(`${functionName} is called and running...`);
+
+    let placeSet = new Set();
+
+    await fetchData(time, object, "", json => processList(json, false, placeSet))
+        .catch(json => handleFetchError(json, functionName));
+
+    console.log([...placeSet]); // Print out places
+    return [...placeSet];
+}
+
+async function getBookByPlace(time, object, place) {
+    const functionName = getBookByPlace.name;
+    console.log(`${functionName} is called and running...`);
+
+    await fetchData(time, object, place, processBooks)
+        .catch(json => handleFetchError(json, functionName));
+}
+
 let eraMenu = document.getElementById("era_menu");
 let thingMenu = document.getElementById("thing_menu");
 let placeMenu = document.getElementById("place_menu");
@@ -183,6 +195,7 @@ const things = [
     "man", "woman", "dog", "cat", "mouse", "fish", "girl", "boy"
 ]
 
+// Create the era drop down menus list for user
 centuries.forEach(function (century) {
     let option = document.createElement('option')
     option.value = century;
@@ -198,12 +211,14 @@ document.addEventListener("DOMContentLoaded", function () {
         thingMenu.innerHTML = "";
 
         fetchBooksByTime(eraMenu.value)
+
         // Show loading message
         thingMenu.disabled = true;
         thingMenu.innerHTML = "<option>Loading...</option>";
 
         let thingCount = 0
-        // Add new options
+
+        // Add new options for each subject found
         for (const thing of things) {
             let objectExists = await checkObject(thing, eraMenu.value);
             if (objectExists) {
@@ -217,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Hide loading message
         thingMenu.disabled = false;
-        if(thingCount > 1){
+        if (thingCount > 1) {
             thingMenu.removeChild(thingMenu.querySelector('option'));
         }
     }
@@ -246,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Event listener for thing menu change
+    // Event listener for thing menu change. updateThingMenu when user chooses something in the drop down era menu
     eraMenu.addEventListener("click", function (event) {
         let target = event.target;
         if (target.tagName === 'OPTION') {
@@ -254,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
 
-    // Event listener for place menu change
+    // Event listener for place menu change. same as era menu but updates placemenu instead
     thingMenu.addEventListener("click", function (event) {
         let target = event.target;
         if (target.tagName === 'OPTION') {
@@ -273,180 +288,30 @@ form.addEventListener("submit", async (event) => {
     await getBookByPlace(eraInput, thingInput, placeInput);
 });
 
-
 function createCard(container, title, author, isbn, year) {
     let card = document.createElement("div");
     card.classList.add("card");
-  
+
     let imgElement = document.createElement("img");
     imgElement.src = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg";
     card.appendChild(imgElement);
-  
+
     let titleElement = document.createElement("p");
     titleElement.innerText = "Title: " + title;
     card.appendChild(titleElement);
-  
+
     let authorElement = document.createElement("p");
     authorElement.innerText = "Author: " + author;
     card.appendChild(authorElement);
-  
+
     let yearElement = document.createElement("p");
     yearElement.innerText = "Publish Year: " + year;
     card.appendChild(yearElement);
-  
+
     let isbnElement = document.createElement("p");
     isbnElement.innerText = "ISBN: " + isbn;
     card.appendChild(isbnElement);
-  
+
     container.appendChild(card);
-  }
-
-
-
-
-
-  /* // Function to fetch books by time
-async function fetchBooksByTime(time) {
-    if (!fetchedBooks[time]) {
-        const functionName = fetchBooksByTime.name;
-        let subjectSet = new Set(); // Use a Set to store unique subjects
-
-        const LIMIT = 1000; // Search through 1000 books at a time
-        let offset = 0;
-        console.log(`${functionName} is called and running...`);
-
-        let numFound = 0;
-
-        do {
-            console.log(`Fetching ${functionName} data from Open Library with offset: ${offset}`);
-
-            // Make the fetch request with the current offset
-            let resp = await fetch(`${openlibraryUrl}time=${time}&language=eng&limit=${LIMIT}&offset=${offset}`);
-            let json = await resp.json();
-
-            // Check if the response is ok
-            if (resp.ok) {
-                numFound = json.numFound;
-                if (numFound > 0) {
-                    console.log(`${numFound} books found with ${time} time`);
-                } else {
-                    console.log("No books found :(");
-                    console.log(`Shutting down ${functionName} program...`);
-                    break; // Exit the loop if no books are found
-                }
-
-                // Process each book in the current response
-                processList(json, subjectSet, false);
-
-                // Increment the offset for the next request
-                offset += LIMIT;
-            } else {
-                console.log("Error fetching data:", json.error);
-                console.log(`Shutting down ${functionName} program...`);
-                break; // Exit the loop if there's an error
-            }
-
-        } while (offset === 5000); //Fecth until we've reached 5000 books
-
-        // Convert the Set back to an array if needed
-        let subjectList = [...subjectSet];
-
-        // Store the fetched books in the global variable
-        fetchedBooks[time] = subjectList;
-    }
-
-    return fetchedBooks[time];
 }
 
-async function getBookByObject(time, object) {
-    const functionName = getBookByObject.name
-
-    let placeSet = new Set();
-
-    const LIMIT = 1000;
-    let offset = 0;
-    console.log(`${functionName} is called and running...`);
-
-    let numFound = 0;
-
-    do {
-        console.log(`Fetching ${functionName} data from Open Library with offset: ${offset}`);
-
-        // Make the fetch request with the current offset
-        let resp = await fetch(`${openlibraryUrl}time=${time}&subject=${object}&language=eng&limit=${LIMIT}&offset=${offset}`);
-        let json = await resp.json();
-
-        // Check if the response is ok
-        if (resp.ok) {
-            numFound = json.numFound;
-
-            if (numFound > 0) {
-
-                console.log(`${numFound} books found with "${time}" time and a "${object}" object`);
-            } else {
-                console.log("No books found :(");
-                console.log(`Shutting down ${functionName} program...`);
-                break; // Exit the loop if no books are found
-            }
-
-            // Process each book in the current response
-            processList(json, false, placeSet);
-
-            // Increment the offset for the next request
-            offset += LIMIT;
-
-        } else {
-            console.log("Error fetching data:", json.error);
-            console.log(`Shutting down ${functionName} program...`);
-            break; // Exit the loop if there's an error
-        }
-
-    } while (offset < numFound); // Continue fetching until we've retrieved all books
-
-    // Convert the Set back to an array if needed
-
-    let placeList = [...placeSet];
-    console.log(placeList); //Show list of places in dropdown menu
-    return placeList;
-}
-
-async function getBookByPlace(time, object, place) {
-
-    const functionName = getBookByPlace.name
-
-    const LIMIT = 100;
-    let offset = 0;
-    console.log(`${functionName} is called and running...`);
-
-    let numFound = 0;
-
-    do {
-        console.log(`Fetching ${functionName} data from Open Library with offset: ${offset}`);
-
-        // Make the fetch request with the current offset
-        let resp = await fetch(`${openlibraryUrl}time=${time}&subject="${object}"&place=${place}&language=eng&limit=${LIMIT}&offset=${offset}`);
-        let json = await resp.json();
-
-        // Check if the response is ok
-        if (resp.ok) {
-            numFound = json.numFound;
-            if (numFound > 0) {
-                console.log(numFound + " books found");
-            } else {
-                console.log("No books found");
-                console.log(`Shutting down ${functionName} program...`);
-                break; // Exit the loop if no books are found
-            }
-
-        processBooks(json)
-
-            // Increment the offset for the next request
-            offset += LIMIT;
-        } else {
-            console.log("Error fetching data:", json.error);
-            console.log(`Shutting down ${functionName} program...`);
-            break; // Exit the loop if there's an error
-        }
-
-    } while (offset < numFound); // Continue fetching until we've retrieved all books
-} */
