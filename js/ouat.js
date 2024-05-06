@@ -52,7 +52,7 @@ async function fetchData(time, object, place, processFunction) {
             return; // Exit the function if there's an error
         }
 
-    } while (offset < maxSearchNum); // Continue fetching until we've retrieved all items
+    } while (offset < maxSearchNum); // Continue fetching until reached specified limit
 }
 
 // Helper function to handle errors and log messages
@@ -256,9 +256,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Hide loading message and remove it
         placeMenu.disabled = false;
-        if (places.length > 1) {
-            placeMenu.removeChild(placeMenu.querySelector('option'));
-        }
     }
 
     // Event listener for thing menu change. updateThingMenu when user chooses something in the drop down era menu
@@ -266,6 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let target = event.target;
         if (target.tagName === 'OPTION') {
             updateThingMenu()
+            placeMenu.innerHTML = ""
         }
     })
 
@@ -284,7 +282,7 @@ form.addEventListener("submit", async (event) => {
     let eraInput = eraMenu.value;
     let thingInput = thingMenu.value
     let placeInput = placeMenu.value
-    console.log(eraInput, thingInput, placeInput);
+   // console.log(eraInput, thingInput, placeInput);
     await getBookByPlace(eraInput, thingInput, placeInput);
 });
 
