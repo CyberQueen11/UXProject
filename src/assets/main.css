@@ -1,0 +1,17 @@
+@import './base.css';
+
+#app {
+}
+
+a:hover {
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+/* Tablets and bigger */
+@media (min-width: 1024px) {
+}
