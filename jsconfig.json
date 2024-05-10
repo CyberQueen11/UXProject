@@ -4,5 +4,10 @@
       "@/*": ["./src/*"]
     }
   },
+  "include": [
+    "src/**/*.vue", // Include all Vue files within the src directory
+    "src/**/*.js", // Include all JavaScript files within the src directory
+    "src/**/*.ts" // Include all TypeScript files within the src directory
+  ],
   "exclude": ["node_modules", "dist"]
 }
