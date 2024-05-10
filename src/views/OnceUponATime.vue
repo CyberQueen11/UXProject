@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+import OnceUponComp from '@/components/OnceUponComp/OnceUponComp.vue'
+</script>
 
 <template>
-  <h1>Once Upon a Time</h1>
+  <main>
+    <OnceUponComp />
+  </main>
 </template>
-
-<style scoped></style>
