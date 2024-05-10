@@ -31,7 +31,7 @@ const router = createRouter({
     {
       path: "/once-upon-a-time",
       name: "Once Upon A Time",
-      component: PhotoSwipe,
+      component: OnceUponATime,
     },
   ],
 });

@@ -1,23 +1,28 @@
 <script setup>
-import DropMenuItem from './DropMenuItem.vue'
+import DropMenuItem from "./DropMenuItem.vue";
+import { characterRoles } from "./characterRoles.js";
+import { eras } from "./eras.js";
 </script>
 
 <template>
   <DropMenuItem>
-    <template #text>Once upon a time in the era of 
+    <template #text>
+        Once upon a time in the era of
       <select class="select w-full max-w-xs">
-  <option disabled selected>Pick your favorite Simpson</option>
-  <option>Homer</option>
-  <option>Marge</option>
-  <option>Bart</option>
-  <option>Lisa</option>
-  <option>Maggie</option>
-</select>
-     </template>
+        <option disabled selected>Pick your era</option>
+        <option v-for="era in eras" :key="era.value" :value="era.value">{{ era.label }}</option>
+      </select>
+    </template>
   </DropMenuItem>
 
   <DropMenuItem>
-    <template #text>There was a ---</template>
+    <template #text>
+        There was a 
+        <select class="select w-full max-w-xs">
+        <option disabled selected>Pick your era</option>
+        <option v-for="character in characterRoles" :key="character.value" :value="character.value">{{ character.label }}</option>
+      </select>
+    </template>
   </DropMenuItem>
 
   <DropMenuItem>

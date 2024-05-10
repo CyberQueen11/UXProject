@@ -1,5 +1,5 @@
 <script setup>
-import OnceUponComp from '@/components/OnceUponComp/OnceUponComp.vue'
+import OnceUponComp from '../components/OnceUponComp/OnceUponComp.vue'
 </script>
 
 <template>

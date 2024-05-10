@@ -25,7 +25,7 @@ import { RouterLink, RouterView } from "vue-router";
     </div>
 
     <div class="app-link">
-      <img src="../assets/book-logo.png" alt="once-upon-time" />
+      <img src="../assets/icons/Once_upon_a_time.png" alt="once-upon-time" />
       <div class="desc">
         <RouterLink to="/once-upon-a-time"
           ><h5>Once Upon a Time</h5></RouterLink
