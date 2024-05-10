@@ -1,4 +1,4 @@
-const eras = [
+export const eras = [
     {value: "10th_century", label: "10th century"},
     {value: "11th_century", label: "11th century"},
     {value: "12th_century", label: "12th century"},

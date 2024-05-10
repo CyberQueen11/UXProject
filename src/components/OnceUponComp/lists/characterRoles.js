@@ -1,4 +1,4 @@
-const characterRoles = [
+export const characterRoles = [
     { value: "hero_heroine", label: "Hero/Heroine" },
     { value: "villain", label: "Villain" },
     { value: "protagonist", label: "Protagonist" },

@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from "vue-router";
     <h4>Welcome to your digital book finder</h4>
 
     <div class="app-link">
-      <img src="../assets/judge-logo.webp" alt="judge" />
+      <img src="../assets/icons/Judge_a_book.png" alt="judge" />
       <div class="desc">
         <RouterLink to="/judge-the-book-by-its-cover">
           <h5>Judge The Book By Its Cover</h5>
@@ -17,7 +17,7 @@ import { RouterLink, RouterView } from "vue-router";
     </div>
 
     <div class="app-link">
-      <img src="../assets/swipe-logo.svg" alt="photo-swipe" />
+      <img src="../assets/icons/Pic_swipe.png" alt="pic-swipe" />
       <div class="desc">
         <RouterLink to="/photo-swipe"><h5>Photo Swipe</h5></RouterLink>
         <p>Let your visual instinct guide you</p>

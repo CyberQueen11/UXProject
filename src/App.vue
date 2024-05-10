@@ -6,13 +6,13 @@ import { RouterLink, RouterView } from "vue-router";
   <div class="container">
     <nav>
       <div class="menu">
-        <img src="./assets/hamburger-menu.svg" alt="menu" />
+        <img src="./assets/icons/Home.png" alt="menu" />
       </div>
       <div class="logo-wrapper">
-        <img src="./assets/appLogo.svg" alt="logo" />
+        <img src="./assets/icons/Logo.svg" alt="logo" />
       </div>
       <div class="my-library">
-        <img src="./assets/library-book.svg" alt="my-library" />
+        <img src="./assets/icons/Books.png" alt="my-library" />
       </div>
     </nav>
 
@@ -22,7 +22,7 @@ import { RouterLink, RouterView } from "vue-router";
 
     <div class="home">
       <RouterLink to="/"
-        ><img src="./assets/home-logo.svg" alt="home"
+        ><img src="./assets/icons/Home.png" alt="home"
       /></RouterLink>
     </div>
   </div>

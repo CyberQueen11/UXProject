@@ -1,7 +1,7 @@
 <script setup>
 import DropMenuItem from "./DropMenuItem.vue";
-import { characterRoles } from "./characterRoles.js";
-import { eras } from "./eras.js";
+import { characterRoles } from "./lists/characterRoles.js";
+import { eras } from "./lists/eras.js";
 </script>
 
 <template>
