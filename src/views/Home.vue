@@ -5,20 +5,24 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   <div class="flex flex-col items-center">
     <!--app logo -->
-    <header class="flex flex-col m-2">
+    <header class="flex flex-col mt-4 lg:my-10">
+      <!-- desktop logo -->
       <img
         class="hidden lg:block"
         src="../assets/icons/Header.png"
         alt="header"
       />
+      <!-- mobile logo -->
       <img
-        class="block lg:hidden"
+        class="w-[200px] block lg:hidden"
         src="../assets/icons/Logotyp_the_book_finder.png"
         alt="header-mobile"
       />
     </header>
+
     <!-- app links -->
     <main>
+      <!-- judge the book by its cover -->
       <div class="app-link">
         <div class="app-logo">
           <img src="../assets/icons/Judge_a_book.png" alt="judge" />
@@ -33,6 +37,7 @@ import { RouterLink, RouterView } from "vue-router";
         </div>
       </div>
 
+      <!-- picture swipe -->
       <div class="app-link">
         <div class="app-logo">
           <img src="../assets/icons/Pic_swipe.png" alt="pic-swipe" />
@@ -47,6 +52,7 @@ import { RouterLink, RouterView } from "vue-router";
         <img src="../assets/icons/Streck.png" alt="underline2" />
       </div>
 
+      <!-- Once Upon a Time -->
       <div class="app-link">
         <div class="app-logo">
           <img
@@ -72,5 +78,3 @@ import { RouterLink, RouterView } from "vue-router";
     </footer>
   </div>
 </template>
-
-<style scoped></style>
