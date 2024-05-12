@@ -2,3 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+.app-link {
+  @apply flex flex-row items-end p-0 m-2.5;
+}
+
+.app-logo {
+  img {
+    @apply w-[125px] h-[80px];
+  }
+}
+
+.app-desc {
+  h3 {
+    @apply font-Quattrocento font-bold;
+  }
+  p {
+    @apply font-RedHatDisplay;
+  }
+}

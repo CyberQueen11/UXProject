@@ -3,94 +3,58 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <div class="wrapper">
-    <h4>Welcome to your digital book finder</h4>
+  <div class="flex flex-col items-center h-screan">
+    <!--app logo -->
+    <header class="m-2">
+      <img src="../assets/icons/Header.png" alt="header" />
+    </header>
+    <main>
+      <RouterLink to="/judge-the-book-by-its-cover">
+        <div class="app-link">
+          <div class="app-logo">
+            <img src="../assets/icons/Judge_a_book.png" alt="judge" />
+          </div>
+          <div class="app-desc">
+            <h3>Judge The Book By Its Cover</h3>
+            <p>Let loose and judge the book by its cover</p>
+          </div>
+        </div>
+      </RouterLink>
 
-    <div class="app-link">
-      <img src="../assets/icons/Judge_a_book.png" alt="judge" />
-      <div class="desc">
-        <RouterLink to="/judge-the-book-by-its-cover">
-          <h5>Judge The Book By Its Cover</h5>
-        </RouterLink>
-        <p>Let loose and judge the book by its cover</p>
-      </div>
-    </div>
+      <RouterLink to="/photo-swipe">
+        <div class="app-link">
+          <div class="app-logo">
+            <img src="../assets/icons/Pic_swipe.png" alt="pic-swipe" />
+          </div>
+          <div class="desc">
+            <h5>Photo Swipe</h5>
+            <p>Let your visual instinct guide you</p>
+          </div>
+        </div>
+      </RouterLink>
 
-    <div class="app-link">
-      <img src="../assets/icons/Pic_swipe.png" alt="pic-swipe" />
-      <div class="desc">
-        <RouterLink to="/photo-swipe"><h5>Photo Swipe</h5></RouterLink>
-        <p>Let your visual instinct guide you</p>
-      </div>
-    </div>
-
-    <div class="app-link">
-      <img src="../assets/icons/Once_upon_a_time.png" alt="once-upon-time" />
-      <div class="desc">
-        <RouterLink to="/once-upon-a-time"
-          ><h5>Once Upon a Time</h5></RouterLink
-        >
-        <p>Write your own story</p>
-      </div>
-    </div>
+      <RouterLink to="/once-upon-a-time">
+        <div class="app-link">
+          <div class="app-logo">
+            <img
+              src="../assets/icons/Once_upon_a_time.png"
+              alt="once-upon-time"
+            />
+          </div>
+          <div class="app-desc">
+            <h5>Once Upon a Time</h5>
+            <p>Write your own story</p>
+          </div>
+        </div>
+      </RouterLink>
+    </main>
+    <footer>
+      <RouterLink to="/about">
+        <p class="font-RedHatDisplay text-darkred">about</p>
+      </RouterLink>
+    </footer>
   </div>
   <RouterView />
 </template>
 
-<style scoped>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 1em;
-  h4 {
-    color: rgb(79, 77, 77);
-    margin-bottom: 0.5em;
-  }
-  div {
-    margin: 1em auto;
-  }
-}
-
-.app-link {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid rgb(79, 77, 77);
-  width: 50%;
-  img {
-    width: 30px;
-    height: 30px;
-  }
-
-  h5 {
-    color: rgb(79, 77, 77);
-  }
-
-  p {
-    font-size: x-small;
-  }
-
-  div {
-    margin-left: 0.5em;
-  }
-}
-
-.wrapper .app-link:last-child {
-  margin-bottom: 10em;
-}
-
-.menu > img {
-  height: 40px;
-  width: 40px;
-}
-
-.logo-wrapper > img {
-  width: 100px;
-  height: 100px;
-}
-
-.my-library > img {
-  height: 35px;
-  width: 35px;
-}
-</style>
+<style scoped></style>

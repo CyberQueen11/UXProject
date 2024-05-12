@@ -1,8 +1,8 @@
 <template>
-  <div class="header">
-    <img src="../assets/icons/Logotyp1-1.png" alt="logo" />
-    <img src="../assets/icons/Streck.png" alt="line" />
-  </div>
+  <!--app logo -->
+  <header class="m-2">
+    <img src="../assets/icons/Header.png" alt="header" />
+  </header>
   <div class="main"></div>
   <div class="footer"></div>
 </template>
