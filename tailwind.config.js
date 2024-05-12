@@ -2,7 +2,22 @@
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        white: "#FFFFFF",
+        brown: "#4D0009",
+        darkred: "#870B1C",
+        darkblue: "#141E46",
+        lightred: "#FF6969",
+        creamywhite: "#FBF6EB",
+        lightgray: "#D9D9D9",
+        darkgray: "#A4A1A1",
+      },
+    },
+    fontFamily: {
+      Quattrocento: "quattrocento",
+      RedHatDisplay: "redhatdisplay",
+    },
   },
   plugins: [],
 };
