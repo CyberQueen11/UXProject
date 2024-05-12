@@ -3,58 +3,74 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <div class="flex flex-col items-center h-screan">
+  <div class="flex flex-col items-center">
     <!--app logo -->
-    <header class="m-2">
-      <img src="../assets/icons/Header.png" alt="header" />
+    <header class="flex flex-col m-2">
+      <img
+        class="hidden lg:block"
+        src="../assets/icons/Header.png"
+        alt="header"
+      />
+      <img
+        class="block lg:hidden"
+        src="../assets/icons/Logotyp_the_book_finder.png"
+        alt="header-mobile"
+      />
     </header>
+    <!-- app links -->
     <main>
-      <RouterLink to="/judge-the-book-by-its-cover">
-        <div class="app-link">
-          <div class="app-logo">
-            <img src="../assets/icons/Judge_a_book.png" alt="judge" />
-          </div>
-          <div class="app-desc">
-            <h3>Judge The Book By Its Cover</h3>
-            <p>Let loose and judge the book by its cover</p>
-          </div>
+      <div class="app-link">
+        <div class="app-logo">
+          <img src="../assets/icons/Judge_a_book.png" alt="judge" />
         </div>
-      </RouterLink>
+        <div class="app-desc">
+          <h3>Judge The Book By Its Cover</h3>
+          <p>Let loose and judge the book by its cover</p>
+          <RouterLink to="/judge-the-book-by-its-cover">
+            <button class="start-button">Start</button>
+          </RouterLink>
+          <img src="../assets/icons/Streck.png" alt="underline1" />
+        </div>
+      </div>
 
-      <RouterLink to="/photo-swipe">
-        <div class="app-link">
-          <div class="app-logo">
-            <img src="../assets/icons/Pic_swipe.png" alt="pic-swipe" />
-          </div>
-          <div class="desc">
-            <h5>Photo Swipe</h5>
-            <p>Let your visual instinct guide you</p>
-          </div>
+      <div class="app-link">
+        <div class="app-logo">
+          <img src="../assets/icons/Pic_swipe.png" alt="pic-swipe" />
         </div>
-      </RouterLink>
+        <div class="app-desc">
+          <h3>Picture Swipe</h3>
+          <p>Let your visual instinct guide you</p>
+        </div>
+        <RouterLink to="/photo-swipe"
+          ><button class="start-button">Start</button></RouterLink
+        >
+        <img src="../assets/icons/Streck.png" alt="underline2" />
+      </div>
 
-      <RouterLink to="/once-upon-a-time">
-        <div class="app-link">
-          <div class="app-logo">
-            <img
-              src="../assets/icons/Once_upon_a_time.png"
-              alt="once-upon-time"
-            />
-          </div>
-          <div class="app-desc">
-            <h5>Once Upon a Time</h5>
-            <p>Write your own story</p>
-          </div>
+      <div class="app-link">
+        <div class="app-logo">
+          <img
+            src="../assets/icons/Once_upon_a_time.png"
+            alt="once-upon-time"
+          />
         </div>
-      </RouterLink>
+        <div class="app-desc">
+          <h3>Once Upon a Time</h3>
+          <p>Write your own story</p>
+        </div>
+        <RouterLink to="/once-upon-a-time"
+          ><button class="start-button">Start</button></RouterLink
+        >
+        <img src="../assets/icons/Streck.png" alt="underline3" />
+      </div>
     </main>
-    <footer>
+    <!-- about -->
+    <footer class="my-10">
       <RouterLink to="/about">
-        <p class="font-RedHatDisplay text-darkred">about</p>
+        <img src="../assets/icons/About.png" alt="underline" />
       </RouterLink>
     </footer>
   </div>
-  <RouterView />
 </template>
 
 <style scoped></style>

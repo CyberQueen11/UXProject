@@ -4,7 +4,7 @@
 @tailwind variants;
 
 .app-link {
-  @apply flex flex-row items-end p-0 m-2.5;
+  @apply flex flex-col items-center m-10;
 }
 
 .app-logo {
@@ -14,10 +14,16 @@
 }
 
 .app-desc {
+  @apply flex flex-col items-center;
+
   h3 {
     @apply font-Quattrocento font-bold;
   }
   p {
     @apply font-RedHatDisplay;
   }
+}
+
+.start-button {
+  @apply bg-darkred hover:bg-brown text-creamywhite px-14 py-1 my-4 rounded;
 }
