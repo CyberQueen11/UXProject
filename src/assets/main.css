@@ -3,6 +3,9 @@
 @tailwind utilities;
 @tailwind variants;
 
+.main-container {
+  @apply flex flex-col min-h-screen bg-creamywhite;
+}
 .app-link {
   @apply flex flex-col items-center m-10;
 }
