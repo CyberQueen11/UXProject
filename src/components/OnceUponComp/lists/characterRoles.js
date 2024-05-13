@@ -1,4 +1,6 @@
 export const characterRoles = [
+  { value: "man", label: "Man" },
+  { value: "woman", label: "Woman" },
   { value: "hero", label: "Hero" },
   { value: "heroine", label: "Heroine" },
   { value: "villain", label: "Villain" },
