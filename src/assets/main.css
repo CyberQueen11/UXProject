@@ -6,6 +6,7 @@
 .main-container {
   @apply flex flex-col min-h-screen bg-creamywhite;
 }
+
 .app-link {
   @apply flex flex-col items-center m-10;
 }
@@ -29,4 +30,12 @@
 
 .start-button {
   @apply bg-darkred hover:bg-brown text-creamywhite px-14 py-1 my-4 rounded;
+}
+
+.group-name {
+  @apply font-Quattrocento text-black text-[25px] mb-4;
+}
+
+.contributors {
+  @apply text-darkred font-Quattrocento text-[25px];
 }
