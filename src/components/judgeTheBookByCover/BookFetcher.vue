@@ -37,19 +37,15 @@ export default {
 
         this.books = [];
         for (const book of data.docs) {
-          const coverExists = await this.checkCoverExists(book.isbn[0]);
-          if (coverExists) {
-            const newBook = {
-              title: book.title,
-              author: book.author_name ? book.author_name[0] : "Unknown",
-              isbn: book.isbn ? book.isbn[0] : "Unknown",
-              publish_year: book.publish_year
-                ? book.publish_year[0]
-                : "Unknown",
-            };
-            if (this.books.length < 3) {
-              this.books.push(newBook);
-            }
+          const newBook = {
+            title: book.title,
+            author: book.author_name ? book.author_name[0] : "Unknown",
+            isbn: book.isbn ? book.isbn[0] : "Unknown",
+            publish_year: book.publish_year ? book.publish_year[0] : "Unknown",
+          };
+          const coverExists = await this.checkCoverExists(newBook.isbn);
+          if (this.books.length < 3 && coverExists) {
+            this.books.push(newBook);
           }
         }
 
