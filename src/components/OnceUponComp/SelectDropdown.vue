@@ -3,7 +3,7 @@ import DropMenuItem from "./DropMenuItem.vue";
 
 export default {
   components: {
-    DropMenuItem
+    DropMenuItem,
   },
   props: {
     label: String,
@@ -13,20 +13,24 @@ export default {
   },
   methods: {
     updateSelection(event) {
+      //updateCharacterList
+      //Fill SubjectList with values fetched from API
+      
+      //Update characterList depending on if(characterRoles in SubjectList) then output updated list
+      //updatePlaceList
+
       //get the index
       let selectedIndex = event.target.selectedIndex;
       //And then get value with index num
       let selectedValue = event.target.options[selectedIndex].value;
-      this.$emit('update:selected', selectedValue);
-      console.log(selectedValue)
-  },
+      this.$emit("update:selected", selectedValue);
+    },
   },
 };
 </script>
 
 <template>
   <DropMenuItem>
-
     <template #text>
       {{ label }}
 
@@ -36,8 +40,6 @@ export default {
           {{ item.label }}
         </option>
       </select>
-
     </template>
-
   </DropMenuItem>
 </template>

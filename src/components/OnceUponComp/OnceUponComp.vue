@@ -1,134 +1,148 @@
-<script setup>
-import DropMenuItem from "./DropMenuItem.vue";
-import { characterRoles } from "./lists/characterRoles.js";
+<script>
+import SelectDropdown from "./SelectDropdown.vue";
 import { eras } from "./lists/eras.js";
+import { characterRoles } from "./lists/characterRoles.js";
 import { places } from "./lists/places.js";
-import { ref } from "vue";
-import FetchedBooks from "./FetchBooks.vue"; // Import the FetchedBooks component
+import FetchBook from "./FetchBook.vue";
 
-let selectedEra = ref(null);
-let selectedCharacter = ref(null);
-let selectedPlace = ref(null);
-let fetchedBooksArray = ref([]);
-let fetchingBooks = ref(false);
+export default {
+  components: {
+    SelectDropdown,
+    FetchBook,
+  },
+  data() {
+    return {
+      selectedEra: null,
+      selectedCharacter: null,
+      selectedPlace: null,
+      book: null,
+      fetching: false,
+      eras: eras,
+      characterRoles: characterRoles,
+      places: places,
+    };
+  },
+  methods: {
+    async fetchData() {
+      this.book = null;
+      this.fetching = true;
+      const openlibraryUrl = "https://openlibrary.org/search.json?";
+      const LIMIT = 500;
+      let offset = 0;
+      let numFound = 0;
+      let maxSearchNum = 5000;
 
-async function fetchData(time, object, place) {
-  const openlibraryUrl = "https://openlibrary.org/search.json?";
-  const LIMIT = 500;
-  let offset = 0;
-  let numFound = 0;
-  let maxSearchNum = 5000;
+      do {
+        console.log(`Fetching data from Open Library with offset: ${offset}`);
 
-  do {
-    console.log(`Fetching data from Open Library with offset: ${offset}`);
+        // Construct the URL based on parameters
+        let url = `${openlibraryUrl}language=eng&limit=${LIMIT}&offset=${offset}`;
+        if (this.selectedEra) {
+          url += `&time=${this.selectedEra}`;
+        }
+        if (this.selectedCharacter) {
+          url += `&subject=${this.selectedCharacter}`;
+        }
+        if (this.selectedPlace) {
+          url += `&place=${this.selectedPlace}`;
+        }
 
-    // Construct the URL based on parameters
-    let url = `${openlibraryUrl}time=${time}&language=eng&limit=${LIMIT}&offset=${offset}`;
-    if (object) {
-      url += `&subject=${object}`;
-    }
-    if (place) {
-      url += `&place=${place}`;
-    }
+        let resp = await fetch(url);
+        let json = await resp.json();
+        console.log(url);
 
-/*     const url = `${openlibraryUrl}time=${time}&subject=${object}&place=${place}&language=eng&limit=${LIMIT}&offset=${offset}`;
- */
-    // Make the fetch request with the current offset
-    let resp = await fetch(url);
-    let json = await resp.json();
+        if (resp.ok) {
+          numFound = json.numFound;
 
-    // Check if the response is ok
-    if (resp.ok) {
-      numFound = json.numFound;
-      if (numFound > 0) {
-        console.log(`${numFound} books found`);
+          if (numFound > 0) {
+            console.log(`${numFound} books found`);
 
-        json.docs.forEach((book) => {
-            const newBook = {
-              title: book.title,
-              author: book.author_name ? book.author_name[0] : "Unknown",
-              isbn: book.isbn ? book.isbn[0] : "Unknown",
-              publish_year: book.publish_year
-                ? book.publish_year[0]
-                : "Unknown",
-            };
-
-            console.log(newBook);
-        });
-      } else {
-        console.log("No items found");
-        return; // Exit the function if no items are found
-      }
-
-      if (numFound < maxSearchNum) {
-        maxSearchNum = numFound;
-      }
-
-      // Increment the offset for the next request
-      offset += LIMIT;
-    } else {
-      console.log("Error fetching data:", json.error);
-      return; // Exit the function if there's an error
-    }
-  } while (offset < maxSearchNum); // Continue fetching until reached specified limit
+            //Check if book has a cover
+            while(this.book === null){
+              const randomIndex = Math.floor(Math.random() * numFound);
+              const randomBook = json.docs[randomIndex];
   
-}
+              console.log("coverNum " + randomBook.cover_i)
+  
+              if (randomBook.cover_i) {
+                console.log("Creating book...")
+                const newBook = {
+                  title: randomBook.title,
+                  author: randomBook.author_name ? randomBook.author_name[0] : "Unknown",
+                  isbn: randomBook.isbn ? randomBook.isbn[0] : "Unknown",
+                  publish_year: randomBook.publish_year
+                    ? randomBook.publish_year[0]
+                    : "Unknown",
+                };
 
+                this.book = newBook;
+
+              } else {
+                console.log("There was no cover")
+              }
+            }
+
+            this.fetching = false;
+          } else {
+            console.log("No items found");
+            this.fetching = false;
+
+            return;
+          }
+
+          if (numFound < maxSearchNum) {
+            maxSearchNum = numFound;
+          }
+
+          offset += LIMIT;
+        } else {
+          console.log("Error fetching data:", json.error);
+          return;
+        }
+      } while (offset < maxSearchNum);
+    },
+
+    handleEraSelection(selectedValue) {
+      this.selectedEra = selectedValue;
+    },
+
+    handleCharacterSelection(selectedValue) {
+      this.selectedCharacter = selectedValue;
+    },
+
+    handlePlaceSelection(selectedValue) {
+      this.selectedPlace = selectedValue;
+    },
+  },
+};
 </script>
 
 <template>
-  <DropMenuItem>
-    <template #text>
-      Once upon a time in the era of
-      <select
-        class="select w-full max-w-xs"
-        @change="selectedEra = $event.target.value"
-      >
-        <option disabled selected>Pick your era</option>
-        <option v-for="era in eras" :key="era.value" :value="era.value">
-          {{ era.label }}
-        </option>
-      </select>
-    </template>
-  </DropMenuItem>
+  <SelectDropdown
+    label="Once upon a time in the era of "
+    placeholder="Pick an era"
+    :items="eras"
+    v-model="selectedEra"
+    @update:selected="handleEraSelection"
+  />
 
-  <DropMenuItem>
-    <template #text>
-      There was a
-      <select
-        class="select w-full max-w-xs"
-        @change="selectedCharacter = $event.target.value"
-      >
-        <option disabled selected>Pick the character</option>
-        <option
-          v-for="character in characterRoles"
-          :key="character.value"
-          :value="character.value"
-        >
-          {{ character.label }}
-        </option>
-      </select>
-    </template>
-  </DropMenuItem>
+  <SelectDropdown
+    label="There was a "
+    placeholder="Pick your character"
+    :items="characterRoles"
+    v-model="selectedCharacter"
+    @update:selected="handleCharacterSelection"
+  />
 
-  <DropMenuItem>
-    <template #text>
-      who lived in
-      <select
-        class="select w-full max-w-xs"
-        @change="selectedPlace = $event.target.value"
-      >
-        <option disabled selected>Pick the place</option>
-        <option v-for="place in places" :key="place.value" :value="place.value">
-          {{ place.label }}
-        </option>
-      </select>
-    </template>
-  </DropMenuItem>
+  <SelectDropdown
+    label="Who lived in "
+    placeholder="Pick a place"
+    :items="places"
+    v-model="selectedPlace"
+    @update:selected="handlePlaceSelection"
+  />
 
-  <button @click="fetchData(selectedEra, selectedCharacter, selectedPlace)">
-    Reveal the book
-  </button>
+  <button @click="fetchData">Reveal the book</button>
 
-  <FetchedBooks :books="fetchedBooksArray" :fetching="fetchingBooks" />
+  <FetchBook :book="book" :fetching="fetching" />
 </template>
