@@ -15,7 +15,7 @@ export default {
     updateSelection(event) {
       //updateCharacterList
       //Fill SubjectList with values fetched from API
-      
+
       //Update characterList depending on if(characterRoles in SubjectList) then output updated list
       //updatePlaceList
 
@@ -33,13 +33,17 @@ export default {
   <DropMenuItem>
     <template #text>
       {{ label }}
-
-      <select class="select w-full max-w-xs" @change="updateSelection">
-        <option disabled selected>{{ placeholder }}</option>
-        <option v-for="item in items" :value="item.value">
-          {{ item.label }}
-        </option>
-      </select>
+      <div>
+        <select
+          class="select w-full max-w-xs mt-[2px] mb-[2vw] rounded-box bg-white text-black border-gray-300"
+          @change="updateSelection"
+        >
+          <option disabled selected>{{ placeholder }}</option>
+          <option v-for="item in items" :value="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+      </div>
     </template>
   </DropMenuItem>
 </template>

@@ -58,17 +58,19 @@ export default {
             console.log(`${numFound} books found`);
 
             //Check if book has a cover
-            while(this.book === null){
+            while (this.book === null) {
               const randomIndex = Math.floor(Math.random() * numFound);
               const randomBook = json.docs[randomIndex];
-  
-              console.log("coverNum " + randomBook.cover_i)
-  
+
+              console.log("coverNum " + randomBook.cover_i);
+
               if (randomBook.cover_i) {
-                console.log("Creating book...")
+                console.log("Creating book...");
                 const newBook = {
                   title: randomBook.title,
-                  author: randomBook.author_name ? randomBook.author_name[0] : "Unknown",
+                  author: randomBook.author_name
+                    ? randomBook.author_name[0]
+                    : "Unknown",
                   isbn: randomBook.isbn ? randomBook.isbn[0] : "Unknown",
                   publish_year: randomBook.publish_year
                     ? randomBook.publish_year[0]
@@ -76,9 +78,8 @@ export default {
                 };
 
                 this.book = newBook;
-
               } else {
-                console.log("There was no cover")
+                console.log("No cover found, searching again....");
               }
             }
 
@@ -118,6 +119,11 @@ export default {
 </script>
 
 <template>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
   <SelectDropdown
     label="Once upon a time in the era of "
     placeholder="Pick an era"
@@ -142,7 +148,12 @@ export default {
     @update:selected="handlePlaceSelection"
   />
 
-  <button @click="fetchData">Reveal the book</button>
+  <button
+    class="btn btn-md md:btn-md lg:btn-lg mt-[5vw] custom-bg-red text-white font-quattrocento"
+    @click="fetchData"
+  >
+    Reveal the book
+  </button>
 
   <FetchBook :book="book" :fetching="fetching" />
 </template>

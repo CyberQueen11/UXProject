@@ -37,7 +37,7 @@ export default {
 
         this.books = [];
         data.docs.forEach((book, index) => {
-          if (index < 3 && book.cover_i) {
+          if (book.cover_i) {
             const newBook = {
               title: book.title,
               author: book.author_name ? book.author_name[0] : "Unknown",

@@ -18,7 +18,6 @@ export default {
       />
     <h3>Title: {{ book.title }}</h3>
     <p>Author: {{ book.author }}</p>
-<!--     <p>ISBN: {{ book.isbn }}</p> -->
     <p>Publish Year: {{ book.publish_year }}</p>
   </div>
   <div v-else-if="fetching">
