@@ -1,14 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quattrocento&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+/* import fonts from google */
+
 
 .main-container {
   @apply flex flex-col min-h-screen bg-creamywhite;
 }
 
 .app-link {
-  @apply flex flex-col items-center m-10;
+  @apply flex flex-col items-center;
+
 }
 
 .app-logo {
@@ -21,21 +28,41 @@
   @apply flex flex-col items-center;
 
   h3 {
-    @apply font-Quattrocento font-bold;
+    @apply font-quattrocento font-extrabold lg:font-medium custom-text-blue text-[20px] lg:text-[1.5vw];
   }
   p {
-    @apply font-RedHatDisplay;
+    @apply font-redHatDisplay custom-text-blue;
   }
 }
 
 .start-button {
-  @apply bg-darkred hover:bg-brown text-creamywhite px-14 py-1 my-4 rounded;
+  @apply font-quattrocento bg-darkred hover:bg-brown text-creamywhite px-14 py-1 lg:py-4 my-4 rounded;
 }
 
 .group-name {
-  @apply font-Quattrocento text-black text-[25px] mb-4;
+  @apply font-quattrocento font-semibold lg:font-medium text-[25px] mb-4;
 }
 
 .contributors {
-  @apply text-darkred font-Quattrocento text-[25px];
+  @apply text-darkred font-quattrocento text-[25px];
+}
+
+.font-quattrocento {
+  font-family: "Quattrocento", serif;
+}
+
+.font-redHatDisplay {
+  font-family: "Red Hat Display", sans-serif;
+}
+
+.custom-bg-red {
+  background-color: #870b1c;
+}
+
+.custom-text-red {
+  color: #870b1c;
+}
+
+.custom-text-blue {
+  color: #141e46;
 }

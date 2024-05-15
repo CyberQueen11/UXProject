@@ -1,18 +1,19 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import AboutButton from "../components/general_components/AboutButton.vue"
+import BooksDecor from "../components/general_components/BooksDecor.vue"
 </script>
 
 <template>
-  <div class="flex flex-col items-center">
     <!--app logo -->
-    <header class="flex flex-col mt-4 lg:my-10">
+    <header class="flex flex-col mt-4 lg:my-10 items-center">
       <!-- desktop logo -->
       <img
-        class="hidden lg:block"
+        class="hidden lg:block w-1/2"
         src="../assets/icons/Header.png"
         alt="header"
       />
+      
       <!-- mobile logo -->
       <img
         class="w-[200px] block lg:hidden"
@@ -23,56 +24,60 @@ import AboutButton from "../components/general_components/AboutButton.vue"
 
     <!-- app links -->
     <main>
-      <!-- judge the book by its cover -->
-      <div class="app-link">
-        <div class="app-logo">
-          <img src="../assets/icons/Judge_a_book.png" alt="judge" />
+      <div class="flex flex-col items-center lg:flex-row lg:mt-20 my-16 lg:mb-32 lg:space-x-52 lg:justify-center">
+        <!-- judge the book by its cover -->
+        <div class="app-link">
+          <div class="app-logo">
+            <img src="../assets/icons/Judge_a_book.png" alt="judge" />
+          </div>
+          <div class="app-desc">
+            <h3 >Judge The Book By Its Cover</h3>
+            <p>Let loose and judge the book by its cover</p>
+            <RouterLink to="/judge-the-book-by-its-cover">
+              <button class="start-button">Start</button>
+            </RouterLink>
+            <img src="../assets/icons/Streck.png" alt="underline1" />
+          </div>
         </div>
-        <div class="app-desc">
-          <h3>Judge The Book By Its Cover</h3>
-          <p>Let loose and judge the book by its cover</p>
-          <RouterLink to="/judge-the-book-by-its-cover">
-            <button class="start-button">Start</button>
-          </RouterLink>
-          <img src="../assets/icons/Streck.png" alt="underline1" />
+  
+        <!-- picture swipe -->
+        <div class="app-link">
+          <div class="app-logo">
+            <img src="../assets/icons/Pic_swipe.png" alt="pic-swipe" />
+          </div>
+          <div class="app-desc">
+            <h3>Picture Swipe</h3>
+            <p>Let your visual instinct guide you</p>
+          </div>
+          <RouterLink to="/photo-swipe"
+            ><button class="start-button">Start</button></RouterLink
+          >
+          <img src="../assets/icons/Streck.png" alt="underline2" />
         </div>
-      </div>
-
-      <!-- picture swipe -->
-      <div class="app-link">
-        <div class="app-logo">
-          <img src="../assets/icons/Pic_swipe.png" alt="pic-swipe" />
+  
+        <!-- Once Upon a Time -->
+        <div class="app-link">
+          <div class="app-logo">
+            <img
+              src="../assets/icons/Once_upon_a_time.png"
+              alt="once-upon-time"
+            />
+          </div>
+          <div class="app-desc">
+            <h3>Once Upon a Time</h3>
+            <p>Write your own story</p>
+          </div>
+          <RouterLink to="/once-upon-a-time"
+            ><button class="start-button">Start</button></RouterLink
+          >
+          <img src="../assets/icons/Streck.png" alt="underline3" />
         </div>
-        <div class="app-desc">
-          <h3>Picture Swipe</h3>
-          <p>Let your visual instinct guide you</p>
-        </div>
-        <RouterLink to="/photo-swipe"
-          ><button class="start-button">Start</button></RouterLink
-        >
-        <img src="../assets/icons/Streck.png" alt="underline2" />
-      </div>
-
-      <!-- Once Upon a Time -->
-      <div class="app-link">
-        <div class="app-logo">
-          <img
-            src="../assets/icons/Once_upon_a_time.png"
-            alt="once-upon-time"
-          />
-        </div>
-        <div class="app-desc">
-          <h3>Once Upon a Time</h3>
-          <p>Write your own story</p>
-        </div>
-        <RouterLink to="/once-upon-a-time"
-          ><button class="start-button">Start</button></RouterLink
-        >
-        <img src="../assets/icons/Streck.png" alt="underline3" />
       </div>
     </main>
+
+    <BooksDecor />
+
     <!-- about -->
     <AboutButton />
 
-  </div>
 </template>

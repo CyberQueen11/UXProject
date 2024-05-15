@@ -33,11 +33,18 @@ import AboutButton from "../components/general_components/AboutButton.vue";
         alt="leftbook"
         class="absolute top-[10vw] left-[4vw] z-10 w-full h-auto"
       />
-      <img
-        src="../assets/icons/bookslightred.png"
-        alt="book icon"
-        class="absolute w-2/3 opacity-50 max-w-[200px] h-auto top-[150vw]"
-      />
+      <div class="absolute flex flex-row justify-center top-[160vw] items-end">
+        <img
+          src="../assets/icons/bookslightred.png"
+          alt="book icon"
+          class=" w-2/3 opacity-50 max-w-[200px] h-auto"
+        />
+        <img
+          src="../assets/icons/booksdarkred.png"
+          alt="book icon"
+          class=" w-2/6 opacity-40 max-w-[200px] h-1/2"
+        />
+      </div>
     </div>
 
     <!-- Background images DESKTOP-->
@@ -47,13 +54,13 @@ import AboutButton from "../components/general_components/AboutButton.vue";
       <img
         src="../assets/onceUponBkgr/book.png"
         alt="book background"
-        class="top-[0vw] left-[0vw] z-10 w-1/2 h-auto"
+        class="top-[0vw] left-[0vw] z-10 w-[60vw] h-auto"
       />
     </div>
 
     <!-- Drop down menu MOBILE & DESKTOP-->
     <div
-      class="absolute z-20 top-[75vw] left-[28vw] lg:top-[0vw] lg:left-[0vw]"
+      class="absolute z-20 top-[75vw] left-[28vw] lg:top-[30vw] lg:left-[28vw]"
     >
       <OnceUponComp />
     </div>
@@ -62,28 +69,3 @@ import AboutButton from "../components/general_components/AboutButton.vue";
   <AboutButton />
 </template>
 
-<style>
-/* import fonts from google */
-@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Quattrocento&display=swap");
-
-.font-quattrocento {
-  font-family: "Quattrocento", serif;
-}
-
-.font-redHatDisplay {
-  font-family: "Red Hat Display", sans-serif;
-}
-
-.custom-bg-red {
-  background-color: #870b1c;
-}
-
-.custom-text-red {
-  color: #870b1c;
-}
-
-.custom-text-blue {
-  color: #141e46;
-}
-</style>
