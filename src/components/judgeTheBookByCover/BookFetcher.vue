@@ -68,7 +68,7 @@ export default {
       }
     },
     selectBook(book) {
-      this.selectedBook = book.isbn;
+      this.selectedBook.push(book.isbn);
       this.getBooks();
       this.books = [];
     },
@@ -77,30 +77,102 @@ export default {
 </script>
 
 <template>
-  <div v-if="selectedBook.length" class="selected-book">
-    <img
-      :src="'https://covers.openlibrary.org/b/isbn/' + selectedBook + '-M.jpg'"
-      alt="selected book"
-    />
-  </div>
+  <header>
+    <!-- mobile -->
+    <div class="block lg:hidden">
+      <div
+        v-if="!selectedBook.length"
+        class="flex flex-col items-center text-center mt-20 mb-10"
+      >
+        <h2 class="font-Quattrocento text-darkred text-[31px] mb-6">
+          Judge the <br />book by its <br />cover
+        </h2>
+        <img src="../../assets/icons/Streck.png" alt="separator" />
+      </div>
+      <div class="flex flex-col items-center text-center mt-20 mb-10">
+        <h4
+          v-if="selectedBook.length != 0"
+          class="font-Quattrocento text-darkred text-[20px]"
+        >
+          Judge the <br />book by its <br />cover
+        </h4>
+      </div>
+    </div>
+    <!-- desktop -->
+    <div class="hidden lg:block flex flex-col items-center text-center mt-40">
+      <h2 class="font-Quattrocento text-darkred text-[31px] mb-6">
+        Judge the book by its cover
+      </h2>
+    </div>
+  </header>
 
-  <p>Click on the book cover</p>
-
-  <div class="flex">
-    <div v-if="books.length" v-for="book in books" :key="book.isbn">
+  <!-- main section -->
+  <main class="flex flex-col items-center">
+    <!-- selected book -->
+    <div v-if="selectedBook.length" class="relative">
       <img
-        class="w-52 h-60 mx-2"
-        @click="selectBook(book)"
+        class="z-0 w-96"
+        src="../../assets/icons/Judge_a_book.png"
+        alt="overlap"
+      />
+      <img
+        class="absolute z-1 top-0 left-32 w-32"
         :src="
           'https://covers.openlibrary.org/b/isbn/' +
-          book.isbn +
-          '-M.jpg?default=false'
+          selectedBook[selectedBook.length - 1] +
+          '-M.jpg'
         "
-        alt="cover"
+        alt="selected book"
       />
     </div>
-    <div v-else>
-      <h5>loading...</h5>
+
+    <!-- text -->
+    <div class="flex flex-col items-center">
+      <div v-if="!selectedBook.length" class="my-6">
+        <p class="text-[16px] font-RedHatDisplay text-black">
+          Choose ONE cover you prefer
+        </p>
+      </div>
+      <div v-if="selectedBook.length == 1" class="my-6">
+        <p class="text-[16px] font-RedHatDisplay text-black">
+          Choose ONE more cover you prefer
+        </p>
+      </div>
+      <div v-if="selectedBook.length == 2" class="my-6 text-center">
+        <p class="text-[16px] font-RedHatDisplay text-black">
+          Choose ONE more cover you prefer...
+        </p>
+        <p class="text-[16px] font-RedHatDisplay text-black">...the last one</p>
+      </div>
+
+      <!-- show new books -->
+      <div class="flex">
+        <div v-if="books.length" v-for="book in books" :key="book.isbn">
+          <img
+            class="w-32 h-40 mx-2"
+            @click="selectBook(book)"
+            :src="
+              'https://covers.openlibrary.org/b/isbn/' +
+              book.isbn +
+              '-M.jpg?default=false'
+            "
+            alt="cover"
+          />
+        </div>
+        <div v-else>
+          <h5>loading...</h5>
+        </div>
+      </div>
     </div>
-  </div>
+    <div v-if="!selectedBook.length" class="my-32">
+      <img
+        class="w-56"
+        src="../../assets/icons/Judge_a_book.png"
+        alt="hammer"
+      />
+    </div>
+    <div v-if="selectedBook.length != 0" class="my-32">
+      <img src="../../assets/icons/Streck.png" alt="separator" />
+    </div>
+  </main>
 </template>
