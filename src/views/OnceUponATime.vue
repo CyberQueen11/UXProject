@@ -1,12 +1,15 @@
 <script setup>
 import OnceUponComp from "../components/OnceUponComp/OnceUponComp.vue";
 import HomeButton from "../components/general_components/HomeButton.vue";
+import AboutButton from "../components/general_components/AboutButton.vue";
 </script>
 
 <template>
-  <main>
+  <header>
     <HomeButton />
+  </header>
 
+  <main>
     <!-- Title MOBILE & DESKTOP-->
     <div class="relative flex justify-center mt-20 lg:mt-32">
       <h2 class="font-quattrocento custom-text-red text-2xl lg:text-4xl">
@@ -55,6 +58,8 @@ import HomeButton from "../components/general_components/HomeButton.vue";
       <OnceUponComp />
     </div>
   </main>
+
+  <AboutButton />
 </template>
 
 <style>

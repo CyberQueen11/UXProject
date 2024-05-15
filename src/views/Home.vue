@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+import AboutButton from "../components/general_components/AboutButton.vue"
 </script>
 
 <template>
@@ -71,10 +72,7 @@ import { RouterLink, RouterView } from "vue-router";
       </div>
     </main>
     <!-- about -->
-    <footer class="my-10">
-      <RouterLink to="/about">
-        <img src="../assets/icons/About.png" alt="underline" />
-      </RouterLink>
-    </footer>
+    <AboutButton />
+
   </div>
 </template>
