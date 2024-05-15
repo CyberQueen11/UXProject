@@ -4,6 +4,7 @@ export default {
     return {
       books: [],
       selectedBook: [],
+      candidates: [],
     };
   },
   mounted() {
@@ -69,8 +70,10 @@ export default {
     },
     selectBook(book) {
       this.selectedBook.push(book.isbn);
+      this.candidates.push(book);
       this.getBooks();
       this.books = [];
+      console.log(this.candidates);
     },
   },
 };
