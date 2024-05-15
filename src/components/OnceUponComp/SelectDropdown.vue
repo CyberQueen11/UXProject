@@ -35,7 +35,7 @@ export default {
       {{ label }}
       <div>
         <select
-          class="select w-full max-w-xs mt-[2px] mb-[2vw] rounded-box bg-white text-black border-gray-300"
+          class="select w-full max-w-xs mt-[2px] mb-[2vw] lg:mt-[0.5px] lg:mb-[0.5vw] rounded-box bg-white text-black border-gray-300"
           @change="updateSelection"
         >
           <option disabled selected>{{ placeholder }}</option>

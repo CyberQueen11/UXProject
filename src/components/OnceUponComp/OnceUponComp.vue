@@ -149,7 +149,7 @@ export default {
   />
 
   <button
-    class="btn btn-md md:btn-md lg:btn-lg mt-[5vw] custom-bg-red text-white font-quattrocento"
+    class="btn btn-md md:btn-md lg:btn-md mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento"
     @click="fetchData"
   >
     Reveal the book

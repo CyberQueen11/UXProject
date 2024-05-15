@@ -4,76 +4,70 @@ import HomeButton from "../components/general_components/HomeButton.vue";
 </script>
 
 <template>
-  <head>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quattrocento&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-
   <main>
     <HomeButton />
 
-    <!-- Title -->
-    <div class="relative flex justify-center mt-[85px]">
-      <h2
-        class="h-auto lg:hidden font-quattrocento text-[31px] custom-text-red"
-      >
+    <!-- Title MOBILE & DESKTOP-->
+    <div class="relative flex justify-center mt-20 lg:mt-32">
+      <h2 class="font-quattrocento custom-text-red text-2xl lg:text-4xl">
         Once Upon A Time
       </h2>
     </div>
 
-    <!-- Paragraph -->
+    <!-- Paragraph MOBILE & DESKTOP-->
     <div class="relative flex justify-center">
-      <p
-        class="h-auto lg:hidden text-[16px] custom-text-blue font-redHatDisplay"
-      >
+      <p class="h-auto text-[16px] custom-text-blue font-redHatDisplay">
         Choose from the options in the dropdown
       </p>
     </div>
 
-    <!-- Background images -->
+    <!-- Background images MOBILE-->
     <div
-      class="relative w-full min-h-screen flex flex-col items-center"
+      class="lg:hidden relative w-full min-h-screen flex flex-col items-center"
     >
-      <!-- Background images -->
       <img
         src="../assets/onceUponBkgr/leftHalf.png"
         alt="leftbook"
         class="absolute top-[10vw] left-[4vw] z-10 w-full h-auto"
       />
-
-      
       <img
-      src="../assets/icons/bookslightred.png"
-      alt="book icon"
-      class="absolute w-2/3 opacity-50 max-w-[200px] h-auto top-[150vw]"
+        src="../assets/icons/bookslightred.png"
+        alt="book icon"
+        class="absolute w-2/3 opacity-50 max-w-[200px] h-auto top-[150vw]"
       />
-      
     </div>
 
-    <div class="absolute z-20 top-[75vw] left-[28vw]">
-        <OnceUponComp />
+    <!-- Background images DESKTOP-->
+    <div
+      class="hidden lg:flex relative w-full min-h-screen flex-col items-center"
+    >
+      <img
+        src="../assets/onceUponBkgr/book.png"
+        alt="book background"
+        class="top-[0vw] left-[0vw] z-10 w-1/2 h-auto"
+      />
     </div>
 
+    <!-- Drop down menu MOBILE & DESKTOP-->
+    <div
+      class="absolute z-20 top-[75vw] left-[28vw] lg:top-[0vw] lg:left-[0vw]"
+    >
+      <OnceUponComp />
+    </div>
   </main>
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quattrocento&display=swap');
+/* import fonts from google */
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quattrocento&display=swap");
 
 .font-quattrocento {
   font-family: "Quattrocento", serif;
 }
 
 .font-redHatDisplay {
-  font-family: 'Red Hat Display', sans-serif;
+  font-family: "Red Hat Display", sans-serif;
 }
 
 .custom-bg-red {
@@ -85,6 +79,6 @@ import HomeButton from "../components/general_components/HomeButton.vue";
 }
 
 .custom-text-blue {
-  color: #141E46;
+  color: #141e46;
 }
 </style>
