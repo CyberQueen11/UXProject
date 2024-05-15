@@ -82,18 +82,18 @@ export default {
     <div class="block lg:hidden">
       <div
         v-if="!selectedBook.length"
-        class="flex flex-col items-center text-center mt-20 mb-10"
+        class="flex flex-col items-center text-center mt-20 mb-4"
       >
         <h2 class="font-Quattrocento text-darkred text-[31px] mb-6">
           Judge the <br />book by its <br />cover
         </h2>
         <img src="../../assets/icons/Streck.png" alt="separator" />
       </div>
-      <div class="flex flex-col items-center text-center mt-20 mb-10">
-        <h4
-          v-if="selectedBook.length != 0"
-          class="font-Quattrocento text-darkred text-[20px]"
-        >
+      <div
+        v-if="selectedBook.length != 0"
+        class="flex flex-col items-center text-center mt-20 mb-10"
+      >
+        <h4 class="font-Quattrocento text-darkred text-[20px]">
           Judge the <br />book by its <br />cover
         </h4>
       </div>
@@ -164,7 +164,8 @@ export default {
         </div>
       </div>
     </div>
-    <div v-if="!selectedBook.length" class="my-32">
+    <!-- footer -->
+    <div v-if="!selectedBook.length" class="mt-20">
       <img
         class="w-56"
         src="../../assets/icons/Judge_a_book.png"
