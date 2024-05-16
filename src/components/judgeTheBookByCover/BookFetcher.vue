@@ -112,7 +112,7 @@ export default {
   <!-- main section -->
   <main class="flex flex-col items-center">
     <!-- selected book -->
-    <div v-if="selectedBook.length" class="relative">
+    <div v-if="selectedBook.length" class="relative block lg:hidden">
       <img
         class="z-0 w-96"
         src="../../assets/icons/Judge_a_book.png"
@@ -152,7 +152,7 @@ export default {
       <div class="flex">
         <div v-if="books.length" v-for="book in books" :key="book.isbn">
           <img
-            class="w-32 h-40 mx-2"
+            class="w-40 h-50 mx-2"
             @click="selectBook(book)"
             :src="
               'https://covers.openlibrary.org/b/isbn/' +
@@ -164,6 +164,16 @@ export default {
         </div>
         <div v-else>
           <h5>loading...</h5>
+        </div>
+        <div v-if="selectedBook.length" class="hidden lg:block w-40 h-50 ml-80">
+          <img
+            :src="
+              'https://covers.openlibrary.org/b/isbn/' +
+              selectedBook[selectedBook.length - 1] +
+              '-M.jpg'
+            "
+            alt="selected book"
+          />
         </div>
       </div>
     </div>
