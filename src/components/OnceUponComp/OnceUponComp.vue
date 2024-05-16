@@ -4,11 +4,13 @@ import { eras } from "./lists/eras.js";
 import { characterRoles } from "./lists/characterRoles.js";
 import { places } from "./lists/places.js";
 import BookCoverReveal from "./BookCoverReveal.vue";
+import RevealBookButton from "../general_components/RevealBookButton.vue";
 
 export default {
   components: {
     SelectDropdown,
     BookCoverReveal,
+    RevealBookButton,
   },
   data() {
     return {
@@ -143,14 +145,19 @@ export default {
     @update:selected="handlePlaceSelection"
   />
 
-  <button
-    class="btn btn-md md:btn-md lg:btn-md mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento"
-    @click="fetchData"
-  >
-    Reveal the book
-  </button>
+  <!-- DESKTOP reveal button -->
+  <div class="hidden lg:block">
+    <button
+      class="btn btn-md md:btn-md lg:btn-md mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento"
+      @click="fetchData"
+    >
+      Reveal the book
+    </button>
+    <BookCoverReveal :book="book" :fetching="fetching"/>
+  </div>
 
-  <!--   <FetchBook :book="book" :fetching="fetching" />
- -->
-  <BookCoverReveal :book="book" />
+  <div class="lg:hidden">
+    <RevealBookButton :book="book" label="Reveal the book"/>
+  </div>
+
 </template>

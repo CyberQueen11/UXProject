@@ -75,8 +75,6 @@ export default {
       <OnceUponComp />
     </div>
 
-    <!--       <BookCoverReveal />
- -->
     <BooksDecor :showOnceUponDecor="true" />
   </main>
 
