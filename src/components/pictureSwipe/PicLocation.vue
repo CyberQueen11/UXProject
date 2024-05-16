@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="flex flex-col items-center">
       <h2 class="mx-2">{{ title }}</h2>
       <div class="carousel">
         <div class="carousel-item my-4 mx-1">
@@ -32,7 +32,8 @@
   <script>
   
   export default {
-    name: "PicContain",
+    name: "PicLocation",
+    emits: ['myEvent2'],
     data() {
       return {
         title: "Location",
