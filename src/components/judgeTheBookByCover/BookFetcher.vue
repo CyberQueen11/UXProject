@@ -68,6 +68,7 @@ export default {
         return false;
       }
     },
+
     selectBook(book) {
       this.selectedBook.push(book.isbn);
       this.candidates.push(book);
@@ -103,7 +104,7 @@ export default {
     </div>
     <!-- desktop -->
     <div class="hidden lg:block flex flex-col items-center text-center mt-32">
-      <h2 class="font-Quattrocento text-darkred text-[31px] mb-6">
+      <h2 class="font-Quattrocento text-darkred text-[31px]">
         Judge the book by its cover
       </h2>
     </div>
@@ -152,7 +153,7 @@ export default {
       <div class="flex">
         <div v-if="books.length" v-for="book in books" :key="book.isbn">
           <img
-            class="lg:mx-6 w-32 lg:w-40 h-50 mx-2 cursor-pointer"
+            class="lg:mx-6 w-32 lg:w-40 h-50 mx-1 cursor-pointer"
             @click="selectBook(book)"
             :src="
               'https://covers.openlibrary.org/b/isbn/' +
@@ -165,7 +166,10 @@ export default {
         <div v-else class="my-24">
           <h5>loading...</h5>
         </div>
-        <div v-if="selectedBook.length" class="hidden lg:block w-40 h-50 ml-44">
+        <div
+          v-if="selectedBook.length"
+          class="hidden lg:block w-40 max-h-50 ml-44"
+        >
           <img
             :src="
               'https://covers.openlibrary.org/b/isbn/' +
