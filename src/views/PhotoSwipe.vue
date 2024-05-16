@@ -12,11 +12,20 @@
 
     <h3>{{ title }}</h3>
     <div class="m-4">
-      <PicGenre />
-      <PicGenre />
-      <PicGenre />
-      <PicGenre />
-      <GenerateButton />
+      <PicGenre @my-event="myGenre" />
+      <PicGenre @my-event="myTopic" />
+      <PicGenre @my-event="myLocation" />
+      <PicGenre @my-event="myTime" />
+      
+      <div>
+      <button
+        class="btn btn-wide bg-indigo-600 text-white text-lg m-2 content-center"
+        @click="getBookBySubjectAndMore(genre, topic, location)"
+      >
+        Reveal book
+      </button>
+    </div>
+
     </div>
     <AboutButton />
   </div>
@@ -24,17 +33,46 @@
 
 <script>
 import PicGenre from "../components/pictureSwipe/PicGenre.vue";
-import GenerateButton from "../components/pictureSwipe/GenerateButton.vue";
 import HomeButton from "@/components/general_components/HomeButton.vue";
 import AboutButton from "@/components/general_components/AboutButton.vue";
 
 export default {
   name: "App",
-  components: { PicGenre, GenerateButton, HomeButton, AboutButton },
+  components: { PicGenre, HomeButton, AboutButton },
   data() {
     return {
       title: "Choose one image in each category",
+      genre: "",
+      topic: "",
+      location: "",
+      time: "",
     };
+  },
+  methods: {
+    myGenre(word) {
+      this.genre = word;
+      console.log(this.genre);
+    },
+    myTopic(word) {
+      this.topic = word;
+      console.log(this.topic);
+    },
+    myLocation(word) {
+      this.location = word;
+      console.log(this.location);
+    },
+    myTime(word) {
+      this.time = word;
+      console.log(this.time);
+    },
+    async getBookBySubjectAndMore(genre, topic, place) {
+      let resp = await fetch(
+        `https://openlibrary.org/search.json?subject=${genre}+${topic}+${place}&fields=key,title,author_name&limit=1`
+      );
+      let json = await resp.json();
+      let check = json.docs[0].title;
+      console.log(check);
+    },
   },
 };
 </script>
