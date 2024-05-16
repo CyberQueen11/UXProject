@@ -3,18 +3,13 @@ import SelectDropdown from "./SelectDropdown.vue";
 import { eras } from "./lists/eras.js";
 import { characterRoles } from "./lists/characterRoles.js";
 import { places } from "./lists/places.js";
-/* import FetchBook from "./FetchBook.vue";
- */import BookCoverReveal from "./BookCoverReveal.vue";
+import BookCoverReveal from "./BookCoverReveal.vue";
 
 export default {
   components: {
     SelectDropdown,
-/*     FetchBook,
- */    BookCoverReveal,
+    BookCoverReveal,
   },
-  /*   props: {
-    book: Object,
-  }, */
   data() {
     return {
       selectedEra: null,
@@ -155,7 +150,7 @@ export default {
     Reveal the book
   </button>
 
-<!--   <FetchBook :book="book" :fetching="fetching" />
- -->  
+  <!--   <FetchBook :book="book" :fetching="fetching" />
+ -->
   <BookCoverReveal :book="book" />
 </template>

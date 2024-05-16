@@ -11,13 +11,13 @@ export default {
 };
 </script>
 <template>
-  <div v-if="book" class="absolute w-full placement">
+  <div v-if="book" class="hidden lg:flex flex-col absolute w-5/6 placement items-center">
     <img
       :src="'https://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'"
       alt="book cover"
     />
 
-    <RevealBookButton :book="book" />
+    <RevealBookButton :book="book" :showOnceUponBook="true"/>
   </div>
   <div
     v-else
