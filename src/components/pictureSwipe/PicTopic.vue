@@ -2,28 +2,25 @@
     <div class="flex flex-col items-center">
       <h2 class="mx-2">{{ title }}</h2>
       <div class="carousel">
+  
         <div class="carousel-item my-4 mx-1">
-          <img class="" src="https://placeholder.pics/svg/160x200" alt="pic" @click="$emit('myEvent1', 'crime')">
+          <img class="" src="..\..\assets\Picture_swipe\Topic\Expedition, adventure.png" alt="pic" @click="$emit('myEvent1', 'adventure')">
         </div>
   
         <div class="carousel-item my-4 mx-1">
-          <img class="" src="https://placeholder.pics/svg/160x200" alt="pic" @click="$emit('myEvent1', 'adventure')">
+          <img class="" src="..\..\assets\Picture_swipe\Topic\Love.png" alt="pic" @click="$emit('myEvent1', 'love')">
         </div>
   
         <div class="carousel-item my-4 mx-1">
-          <img class="" src="https://placeholder.pics/svg/160x200" alt="pic" @click="$emit('myEvent1', 'love')">
+          <img class="" src="..\..\assets\Picture_swipe\Topic\Royal, kingdom, king, queen.png" alt="pic" @click="$emit('myEvent1', 'royal')">
         </div>
   
         <div class="carousel-item my-4 mx-1">
-          <img class="" src="https://placeholder.pics/svg/160x200" alt="pic" @click="$emit('myEvent1', 'royal')">
+          <img class="" src="..\..\assets\Picture_swipe\Topic\technology.png" alt="pic" @click="$emit('myEvent1', 'technology')">
         </div>
   
         <div class="carousel-item my-4 mx-1">
-          <img class="" src="https://placeholder.pics/svg/160x200" alt="pic" @click="$emit('myEvent1', 'technology')">
-        </div>
-  
-        <div class="carousel-item my-4 mx-1">
-          <img class="" src="https://placeholder.pics/svg/160x200" alt="pic" @click="$emit('myEvent1', 'war')">
+          <img class="" src="..\..\assets\Picture_swipe\Topic\war.png" alt="pic" @click="$emit('myEvent1', 'war')">
         </div>
       </div>
     </div>

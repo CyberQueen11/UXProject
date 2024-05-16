@@ -11,10 +11,6 @@
       </div>
 
       <div class="carousel-item my-4 mx-1">
-        <img class="" src="..\..\assets\Picture_swipe\Genre\Mystery.png" alt="pic" @click="$emit('myEvent', 'mystery')">
-      </div>
-
-      <div class="carousel-item my-4 mx-1">
         <img class="" src="..\..\assets\Picture_swipe\Genre\Romance.png" alt="pic" @click="$emit('myEvent', 'romance')">
       </div>
 
