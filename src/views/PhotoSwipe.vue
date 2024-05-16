@@ -16,38 +16,15 @@
       </p>
     </div>
     <div class="m-4 flex flex-col items-center">
-      <img
-        class="m-4 hidden lg:block" v-if="!showChecked"
-        src="..\assets\icons\ph_circle-thin.png"
-        alt="circle"
-      />
-
-      <img class="m-4 hidden lg:block" v-if="showChecked" src="..\assets\icons\ph_circle-thin-1.png" alt="">
-
       <PicGenre @my-event="myGenre" />
       <img class="m-4 lg:hidden" src="..\assets\icons\Streck.png" alt="line" />
 
-      <img
-        class="m-4 hidden lg:block"
-        src="..\assets\icons\ph_circle-thin.png"
-        alt="circle"
-      />
       <PicTopic @my-event1="myTopic" />
       <img class="m-4 lg:hidden" src="..\assets\icons\Streck.png" alt="line" />
 
-      <img
-        class="m-4 hidden lg:block"
-        src="..\assets\icons\ph_circle-thin.png"
-        alt="circle"
-      />
       <PicLocation @my-event2="myLocation" />
       <img class="m-4 lg:hidden" src="..\assets\icons\Streck.png" alt="line" />
 
-      <img
-        class="m-4 hidden lg:block"
-        src="..\assets\icons\ph_circle-thin.png"
-        alt="circle"
-      />
       <PicTime @my-event3="myTime" />
       <img class="m-4 lg:hidden" src="..\assets\icons\Streck.png" alt="line" />
 
@@ -92,32 +69,23 @@ export default {
       topic: "",
       location: "",
       time: "",
-      showChecked: false
     };
   },
   methods: {
-    toggleChecked() {
-      this.showChecked = !this.showChecked
-      console.log(this.showChecked)
-    },
     myGenre(word) {
       this.genre = word;
-      this.toggleChecked()
       console.log(this.genre);
     },
     myTopic(word) {
       this.topic = word;
-      this.toggleChecked()
       console.log(this.topic);
     },
     myLocation(word) {
       this.location = word;
-      this.toggleChecked()
       console.log(this.location);
     },
     myTime(word) {
       this.time = word;
-      this.toggleChecked()
       console.log(this.time);
     },
     async getBookBySubjectAndMore(genre, topic, place) {
