@@ -3,16 +3,17 @@ import OnceUponComp from "../components/OnceUponComp/OnceUponComp.vue";
 import HomeButton from "../components/general_components/HomeButton.vue";
 import AboutButton from "../components/general_components/AboutButton.vue";
 import BooksDecor from "../components/general_components/BooksDecor.vue";
+import BookCoverReveal from "../components/OnceUponComp/BookCoverReveal.vue";
 
 export default {
   components: {
     BooksDecor,
     OnceUponComp,
     HomeButton,
-    AboutButton
+    AboutButton,
+    BookCoverReveal,
   },
-}; 
-
+};
 </script>
 
 <template>
@@ -59,9 +60,7 @@ export default {
     </div>
 
     <!-- Background images DESKTOP-->
-    <div
-      class="hidden lg:flex relative w-full mb-[80px] flex-col items-center"
-    >
+    <div class="hidden lg:flex relative w-full flex-col items-center">
       <img
         src="../assets/onceUponBkgr/book.png"
         alt="book background"
@@ -75,9 +74,11 @@ export default {
     >
       <OnceUponComp />
     </div>
+
+    <!--       <BookCoverReveal />
+ -->
+    <BooksDecor :showOnceUponDecor="true" />
   </main>
 
   <AboutButton />
-
-  <BooksDecor :showOnceUponDecor="true" />
 </template>

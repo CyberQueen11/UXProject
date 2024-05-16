@@ -3,13 +3,18 @@ import SelectDropdown from "./SelectDropdown.vue";
 import { eras } from "./lists/eras.js";
 import { characterRoles } from "./lists/characterRoles.js";
 import { places } from "./lists/places.js";
-import FetchBook from "./FetchBook.vue";
+/* import FetchBook from "./FetchBook.vue";
+ */import BookCoverReveal from "./BookCoverReveal.vue";
 
 export default {
   components: {
     SelectDropdown,
-    FetchBook,
+/*     FetchBook,
+ */    BookCoverReveal,
   },
+  /*   props: {
+    book: Object,
+  }, */
   data() {
     return {
       selectedEra: null,
@@ -119,11 +124,6 @@ export default {
 </script>
 
 <template>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-
   <SelectDropdown
     label="Once upon a time in the era of "
     placeholder="Pick an era"
@@ -155,5 +155,7 @@ export default {
     Reveal the book
   </button>
 
-  <FetchBook :book="book" :fetching="fetching" />
+<!--   <FetchBook :book="book" :fetching="fetching" />
+ -->  
+  <BookCoverReveal :book="book" />
 </template>
