@@ -18,7 +18,7 @@ export default {
   <RouterLink :to="{ name: 'Home' }">
     <input
       type="button"
-      class="btn btn-md md:btn-md lg:btn-md mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento lg:w-[8vw] w-auto"
+      class="btn btn-md md:btn-md lg:btn-lg mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento w-auto"
       :value="label"
     />
   </RouterLink>
