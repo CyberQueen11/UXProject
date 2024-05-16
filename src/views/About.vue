@@ -1,3 +1,17 @@
+<script>
+import AboutUsHeader from "../components/general_components/AboutUsHeader.vue";
+import LineImage from "../components/general_components/LineImage.vue";
+import BooksDecor from "../components/general_components/BooksDecor.vue";
+
+export default {
+  components: {
+    BooksDecor,
+    AboutUsHeader,
+    LineImage
+  },
+};
+</script>
+
 <template>
   <div class="flex flex-col items-center">
     <header>
@@ -75,14 +89,7 @@
         alt=""
       />
 
-      <BooksDecor />
-
+      <BooksDecor :showHomeAboutDecor="true"/>
     </main>
   </div>
 </template>
-
-<script setup>
-import AboutUsHeader from "../components/general_components/AboutUsHeader.vue";
-import LineImage from "../components/general_components/LineImage.vue";
-import BooksDecor from "../components/general_components/BooksDecor.vue"
-</script>

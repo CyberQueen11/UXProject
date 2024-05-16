@@ -1,5 +1,19 @@
+<script>
+export default {
+  props: {
+    showHomeAboutDecor: Boolean,
+    showOnceUponDecor: Boolean,
+    showPictureSwipeDecor: Boolean,
+    showJudgeBookDecor: Boolean,
+  },
+};
+</script>
+
 <template>
-  <div class="hidden lg:flex flex-row items-end mt-[2vw] mb-[3vw] justify-center overflow-x-hidden">
+  <div
+    v-if="showHomeAboutDecor"
+    class="hidden lg:flex flex-row items-end mt-[2vw] mb-[3vw] justify-center overflow-x-hidden"
+  >
     <img class="w-[200px]" src="../../assets/icons/booksdarkred.png" alt="" />
     <img
       class="w-[150px] h-1/2"
@@ -31,5 +45,49 @@
       src="../../assets/icons/booksdarkred.png"
       alt=""
     />
+  </div>
+
+  <div
+    v-if="showOnceUponDecor"
+    class="hidden lg:flex flex-row items-end mb-[3vw] justify-center overflow-x-hidden"
+  >
+    <img class="w-[200px] invisible" src="../../assets/icons/booksdarkred.png" alt="" />
+    <img
+      class="w-[150px] h-1/2"
+      src="../../assets/icons/booksdarkred.png"
+      alt=""
+    />
+    <img class="w-[200px]" src="../../assets/icons/booksdarkred.png" alt="" />
+    <img
+      class="w-[150px] h-1/2"
+      src="../../assets/icons/booksdarkred.png"
+      alt=""
+    />
+    <img class="w-[200px] invisible" src="../../assets/icons/bookslightred.png" alt="" />
+    <img
+      class="w-[150px] h-1/2 invisible"
+      src="../../assets/icons/bookslightred.png"
+      alt=""
+    />
+    <img class="w-[200px] invisible" src="../../assets/icons/booksdarkred.png" alt="" />
+    <img
+      class="w-[150px] h-1/2"
+      src="../../assets/icons/booksdarkred.png"
+      alt=""
+    />
+    <img class="w-[200px] " src="../../assets/icons/booksdarkred.png" alt="" />
+    <img
+      class="w-[150px] h-1/2 invisible"
+      src="../../assets/icons/booksdarkred.png"
+      alt=""
+    />
+  </div>
+
+  <div v-if="showPictureSwipeDecor">
+    <!-- Show books images at the bottom of page here -->
+  </div>
+
+  <div v-if="showJudgeBookDecor">
+    <!-- Show books images at the bottom of page here -->
   </div>
 </template>

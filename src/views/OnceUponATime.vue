@@ -1,7 +1,18 @@
-<script setup>
+<script>
 import OnceUponComp from "../components/OnceUponComp/OnceUponComp.vue";
 import HomeButton from "../components/general_components/HomeButton.vue";
 import AboutButton from "../components/general_components/AboutButton.vue";
+import BooksDecor from "../components/general_components/BooksDecor.vue";
+
+export default {
+  components: {
+    BooksDecor,
+    OnceUponComp,
+    HomeButton,
+    AboutButton
+  },
+}; 
+
 </script>
 
 <template>
@@ -37,19 +48,19 @@ import AboutButton from "../components/general_components/AboutButton.vue";
         <img
           src="../assets/icons/bookslightred.png"
           alt="book icon"
-          class=" w-2/3 opacity-50 max-w-[200px] h-auto"
+          class="w-2/3 opacity-50 max-w-[200px] h-auto"
         />
         <img
           src="../assets/icons/booksdarkred.png"
           alt="book icon"
-          class=" w-2/6 opacity-40 max-w-[200px] h-1/2"
+          class="w-2/6 opacity-40 max-w-[200px] h-1/2"
         />
       </div>
     </div>
 
     <!-- Background images DESKTOP-->
     <div
-      class="hidden lg:flex relative w-full min-h-screen flex-col items-center"
+      class="hidden lg:flex relative w-full mb-[80px] flex-col items-center"
     >
       <img
         src="../assets/onceUponBkgr/book.png"
@@ -67,5 +78,6 @@ import AboutButton from "../components/general_components/AboutButton.vue";
   </main>
 
   <AboutButton />
-</template>
 
+  <BooksDecor :showOnceUponDecor="true" />
+</template>

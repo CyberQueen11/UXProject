@@ -1,7 +1,14 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from "vue-router";
 import AboutButton from "../components/general_components/AboutButton.vue"
 import BooksDecor from "../components/general_components/BooksDecor.vue"
+
+export default {
+  components: {
+    BooksDecor,
+    AboutButton
+  },
+};
 </script>
 
 <template>
@@ -75,7 +82,7 @@ import BooksDecor from "../components/general_components/BooksDecor.vue"
       </div>
     </main>
 
-    <BooksDecor />
+    <BooksDecor :showHomeAboutDecor="true"/>
 
     <!-- about -->
     <AboutButton />
