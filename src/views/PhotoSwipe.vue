@@ -13,9 +13,9 @@
     <h3>{{ title }}</h3>
     <div class="m-4">
       <PicGenre @my-event="myGenre" />
-      <PicGenre @my-event="myTopic" />
-      <PicGenre @my-event="myLocation" />
-      <PicGenre @my-event="myTime" />
+      <PicTopic @my-event1="myTopic" />
+      <PicLocation @my-event2="myLocation" />
+      <PicTime @my-event3="myTime" />
       
       <div>
       <button
@@ -33,12 +33,15 @@
 
 <script>
 import PicGenre from "../components/pictureSwipe/PicGenre.vue";
+import PicTopic from "../components/pictureSwipe/PicTopic.vue";
+import PicLocation from "../components/pictureSwipe/PicLocation.vue";
+import PicTime from "../components/pictureSwipe/PicTime.vue";
 import HomeButton from "@/components/general_components/HomeButton.vue";
 import AboutButton from "@/components/general_components/AboutButton.vue";
 
 export default {
   name: "App",
-  components: { PicGenre, HomeButton, AboutButton },
+  components: { PicGenre, PicTopic, PicLocation, PicTime, HomeButton, AboutButton },
   data() {
     return {
       title: "Choose one image in each category",
