@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col items-center">
-      <h2 class="mx-2">{{ title }}</h2>
+      <p class="mx-2 text-3xl font-quattrocento">{{ title }}</p>
       <div class="carousel">
         <div class="carousel-item my-4 mx-1">
           <img class="" src="..\..\assets\Picture_swipe\Location\africa.png" alt="pic" @click="$emit('myEvent2', 'africa')">

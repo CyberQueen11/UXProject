@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center">
-    <h2 class="mx-2">{{ title }}</h2>
+    <h2 class="mx-2 text-3xl font-quattrocento">{{ title }}</h2>
     <div class="carousel">
       <div class="carousel-item my-4 mx-1">
         <img class="" src="..\..\assets\Picture_swipe\Genre\Fantasy.png" alt="pic" @click="$emit('myEvent', 'fantasy')">
@@ -36,6 +36,8 @@ export default {
       genre: "",
     };
   },
-  methods: {},
+  methods: {
+
+  },
 };
 </script>
