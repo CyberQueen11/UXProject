@@ -70,7 +70,7 @@ export default {
     },
     async getBookBySubjectAndMore(genre, topic, place) {
       let resp = await fetch(
-        `https://openlibrary.org/search.json?subject=${genre}+${topic}+${place}&fields=key,title,author_name&limit=1`
+        `https://openlibrary.org/search.json?subject=${genre}+${topic}+${place}+&fields=key,title,author_name&limit=1`
       );
       let json = await resp.json();
       let check = json.docs[0].title;
