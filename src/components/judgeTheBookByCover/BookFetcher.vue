@@ -102,7 +102,7 @@ export default {
       </div>
     </div>
     <!-- desktop -->
-    <div class="hidden lg:block flex flex-col items-center text-center mt-40">
+    <div class="hidden lg:block flex flex-col items-center text-center mt-32">
       <h2 class="font-Quattrocento text-darkred text-[31px] mb-6">
         Judge the book by its cover
       </h2>
@@ -112,7 +112,7 @@ export default {
   <!-- main section -->
   <main class="flex flex-col items-center">
     <!-- selected book -->
-    <div v-if="selectedBook.length" class="relative block lg:hidden">
+    <div v-if="selectedBook.length" class="relative block lg:hidden mb-10">
       <img
         class="z-0 w-96"
         src="../../assets/icons/Judge_a_book.png"
@@ -152,7 +152,7 @@ export default {
       <div class="flex">
         <div v-if="books.length" v-for="book in books" :key="book.isbn">
           <img
-            class="w-40 h-50 mx-2"
+            class="lg:mx-6 w-32 lg:w-40 h-50 mx-2 cursor-pointer"
             @click="selectBook(book)"
             :src="
               'https://covers.openlibrary.org/b/isbn/' +
@@ -162,10 +162,10 @@ export default {
             alt="cover"
           />
         </div>
-        <div v-else>
+        <div v-else class="my-24">
           <h5>loading...</h5>
         </div>
-        <div v-if="selectedBook.length" class="hidden lg:block w-40 h-50 ml-80">
+        <div v-if="selectedBook.length" class="hidden lg:block w-40 h-50 ml-44">
           <img
             :src="
               'https://covers.openlibrary.org/b/isbn/' +
@@ -177,16 +177,42 @@ export default {
         </div>
       </div>
     </div>
-    <!-- footer -->
-    <div v-if="!selectedBook.length" class="mt-20">
-      <img
-        class="w-56"
-        src="../../assets/icons/Judge_a_book.png"
-        alt="hammer"
-      />
+    <!-- footer - mobile -->
+    <div class="lg:hidden">
+      <div v-if="!selectedBook.length" class="mt-20">
+        <img
+          class="w-56"
+          src="../../assets/icons/Judge_a_book.png"
+          alt="hammer"
+        />
+      </div>
+      <div v-if="selectedBook.length != 0" class="my-20">
+        <img src="../../assets/icons/Streck.png" alt="separator" />
+      </div>
     </div>
-    <div v-if="selectedBook.length != 0" class="my-32">
-      <img src="../../assets/icons/Streck.png" alt="separator" />
+    <!-- footer - desktop -->
+    <div class="mt-16 hidden lg:block">
+      <div class="flex space-x-[40rem] items-end">
+        <div class="right-icons flex">
+          <img
+            class="w-32 h-32"
+            src="../../assets/icons/booksdarkred.png"
+            alt="red books"
+          />
+          <img
+            class="w-32 h-32"
+            src="../../assets/icons/Judge_a_book.png"
+            alt="hammer"
+          />
+        </div>
+        <div class="left-icons">
+          <img
+            class="w-20 h-20"
+            src="../../assets/icons/booksdarkred.png"
+            alt="red books"
+          />
+        </div>
+      </div>
     </div>
   </main>
 </template>
