@@ -5,6 +5,8 @@ import { characterRoles } from "./lists/characterRoles.js";
 import { places } from "./lists/places.js";
 import BookCoverReveal from "./BookCoverReveal.vue";
 import RevealBookButton from "../general_components/RevealBookButton.vue";
+import { useCharacterStore } from "@/stores/CharacterStore";
+import { usePlaceStore } from "@/stores/PlaceStore";
 
 export default {
   components: {
@@ -22,8 +24,18 @@ export default {
       eras: eras,
       characterRoles: characterRoles,
       places: places,
+      characterLoading: false,
+      placeLoading: false,
     };
   },
+
+  setup() {
+    const characterStore = useCharacterStore();
+    const placeStore = usePlaceStore();
+
+    return { characterStore, placeStore };
+  },
+
   methods: {
     async fetchData() {
       this.book = null;
@@ -51,7 +63,6 @@ export default {
 
         let resp = await fetch(url);
         let json = await resp.json();
-        console.log(url);
 
         if (resp.ok) {
           numFound = json.numFound;
@@ -105,16 +116,135 @@ export default {
       } while (offset < maxSearchNum);
     },
 
-    handleEraSelection(selectedValue) {
+    async handleEraSelection(selectedValue) {
       this.selectedEra = selectedValue;
+      try {
+        this.characterLoading = true;
+        // Call the API to get subjects based on the selected era
+        const subjectSet = await this.fetchSubjects(selectedValue);
+
+        console.log(subjectSet);
+        // Update the character list based on the subjects
+        this.characterStore.characters = this.characterStore.characters.map(
+          (character) => {
+            const searchWord = new RegExp(`\\b${character.value}\\b`, "i");
+            const exists = Array.from(subjectSet).some((subject) =>
+              searchWord.test(subject)
+            );
+            return { ...character, exists }; // Return the updated character object
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching subjects:", error);
+        // Handle error if fetchSubjects fails
+      }
+      this.characterLoading = false;
     },
 
-    handleCharacterSelection(selectedValue) {
-      this.selectedCharacter = selectedValue;
+    async handleCharacterSelection(selectedValue) {
+      this.selectedCharacter = selectedValue
+      this.placeLoading = true;
+      const placeSet = await this.fetchPlaces(selectedValue);
+
+      let placesList = this.placeStore.places;
+
+      //Empty list
+      placesList.splice(0, placesList.length);
+
+      const placesWithLabel = Array.from(placeSet).map((place) => ({
+        value: place.value,
+        label: place.label,
+        exists: true
+      }));
+
+      //Add places
+      placesList.push(...placesWithLabel);
+
+      //Update placeStore
+      this.placeStore.updatePlaces(placesList);
+
+      this.placeLoading = false;
     },
 
     handlePlaceSelection(selectedValue) {
       this.selectedPlace = selectedValue;
+    },
+
+    async fetchSubjects(selectedValue) {
+      const subjectSet = new Set();
+      const openlibraryURL = "https://openlibrary.org/search.json?";
+      const LIMIT = 500;
+      let offset = 0;
+      let numFound = 0;
+      let maxSearchNum = 1000;
+
+      while (offset < maxSearchNum) {
+        let eraURL = `${openlibraryURL}language=eng&limit=${LIMIT}&offset=${offset}&time=${selectedValue}`;
+
+        let resp = await fetch(eraURL);
+        let json = await resp.json();
+
+        // Add each subject to the set list
+        for (const element of json.docs) {
+          if (element.subject && Array.isArray(element.subject)) {
+            let subjects = element.subject;
+            for (const subElement of subjects) {
+              subjectSet.add(subElement);
+            }
+          }
+        }
+
+        if (json.numFound) {
+          numFound = json.numFound;
+          if (numFound < maxSearchNum) {
+            maxSearchNum = numFound;
+          }
+        } else {
+          console.log("There was no json.numFound");
+          break;
+        }
+
+        offset += LIMIT;
+      }
+
+      return subjectSet;
+    },
+
+    async fetchPlaces(selectedValue) {
+      const placeSet = new Set();
+      const openlibraryUrl = "https://openlibrary.org/search.json?";
+      let numFound = 0;
+
+      console.log(this.selectedEra);
+      let characterURL = `${openlibraryUrl}language=eng&time=${this.selectedEra}&subject=${selectedValue}`;
+
+      let resp = await fetch(characterURL);
+      let json = await resp.json();
+
+      if (json.numFound) {
+        numFound = json.numFound;
+        console.log(`${numFound} books found`);
+      } else {
+        console.log("There were no books found");
+      }
+
+      // Add each place to the set list
+      for (const element of json.docs) {
+        if (element.place && Array.isArray(element.place)) {
+          let places = element.place;
+          for (const placeElement of places) {
+            // Assuming placeElement has properties for both value and label
+            let placeObject = {
+              value: placeElement.toLowerCase(), // Replace with the actual property name for value
+              label: placeElement, // Replace with the actual property name for label
+            };
+
+            placeSet.add(placeObject); // Add the place object to the list
+          }
+        }
+      }
+
+      return placeSet;
     },
   },
 };
@@ -132,17 +262,19 @@ export default {
   <SelectDropdown
     label="There was a "
     placeholder="Pick your character"
-    :items="characterRoles"
+    :items="characterStore.characters"
     v-model="selectedCharacter"
     @update:selected="handleCharacterSelection"
+    :characterLoading="characterLoading"
   />
 
   <SelectDropdown
     label="Who lived in "
     placeholder="Pick a place"
-    :items="places"
+    :items="placeStore.places"
     v-model="selectedPlace"
     @update:selected="handlePlaceSelection"
+    :placeLoading="placeLoading"
   />
 
   <!-- DESKTOP reveal button -->
@@ -153,11 +285,10 @@ export default {
     >
       Reveal the book
     </button>
-    <BookCoverReveal :book="book" :fetching="fetching"/>
+    <BookCoverReveal :book="book" :fetching="fetching" />
   </div>
 
   <div class="lg:hidden">
-    <RevealBookButton :book="book" label="Reveal the book"/>
+    <RevealBookButton :book="book" label="Reveal the book" />
   </div>
-
 </template>

@@ -9,19 +9,15 @@ export default {
     label: String,
     placeholder: String,
     items: Array,
-    value: [String, Number],
+    value: String,
+    characterLoading: Boolean,
+    placeLoading: Boolean,
   },
+
   methods: {
-    updateSelection(event) {
-      //updateCharacterList
-      //Fill SubjectList with values fetched from API
-
-      //Update characterList depending on if(characterRoles in SubjectList) then output updated list
-      //updatePlaceList
-
-      //get the index
+    async updateSelection(event) {
+      //Get selected drop down menus value
       let selectedIndex = event.target.selectedIndex;
-      //And then get value with index num
       let selectedValue = event.target.options[selectedIndex].value;
       this.$emit("update:selected", selectedValue);
     },
@@ -37,9 +33,15 @@ export default {
         <select
           class="select w-11/12 max-w-xs mt-[2px] mb-[2vw] lg:mt-[0.5px] lg:mb-[0.5vw] rounded-box bg-white text-black border-gray-300"
           @change="updateSelection"
+          :disabled="characterLoading || placeLoading"
+          :class="{ 'select-disabled': characterLoading || placeLoading }"
         >
-          <option disabled selected>{{ placeholder }}</option>
-          <option v-for="item in items" :value="item.value">
+          <option v-if="characterLoading || placeLoading" disabled>Loading...</option>
+          <option v-else disabled selected>{{ placeholder }}</option>
+          <option
+            v-for="item in items.filter((item) => item.exists)"
+            :value="item.value"
+          >
             {{ item.label }}
           </option>
         </select>
@@ -47,3 +49,10 @@ export default {
     </template>
   </DropMenuItem>
 </template>
+
+<style scoped>
+.select-disabled {
+  background-color: #f6f6f6 !important; 
+  color: #c7c1c1 !important;
+}
+</style>
