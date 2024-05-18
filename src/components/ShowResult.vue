@@ -78,7 +78,7 @@
       </div>
 
       <!-- book summary -->
-      <div class="w-52 mt-10">
+      <div class="w-40 mt-10">
         <p class="text-black font-RedHatDisplay">
           <strong>Summary:</strong> <br />{{ book.summary }}
         </p>
