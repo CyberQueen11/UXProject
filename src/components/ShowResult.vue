@@ -54,7 +54,7 @@
 
     <div class="flex flex-row-reverse justify-center items-start">
       <!-- book-info -->
-      <div class="flex flex-col text-black font-RedHatDisplay mt-10">
+      <div class="flex flex-col text-black font-RedHatDisplay mt-10 w-40">
         <p class="mb-6">
           <strong>Title:</strong> {{ book.title }}<br />
           <strong>By:</strong> {{ book.author }}
