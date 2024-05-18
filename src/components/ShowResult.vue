@@ -1,14 +1,16 @@
 <template>
   <!-- mobile design -->
-  <div class="flex flex-col items-center block md:hidden">
+  <div class="flex flex-col items-center block lg:hidden">
     <!-- header -->
     <div class="bg-darkblue w-full h-36 flex items-center justify-center mt-24">
       <h1 class="font-Quattrocento text-[39px] text-creamywhite text-center">
         Your next <br />
         book!
       </h1>
-      <!-- cover holder -->
     </div>
+    <!-- main section -->
+
+    <!-- cover holder -->
     <div class="relative flex flex-col items-center my-4">
       <img class="z-0" src="../assets/icons/Vector 1.png" alt="vector" />
       <img
@@ -17,6 +19,7 @@
         alt="Book cover"
       />
     </div>
+
     <!-- book-info -->
     <div
       class="flex flex-col items-start text-black text-[18px] font-RedHatDisplay w-4/6"
@@ -37,10 +40,10 @@
 
   <!-- desktop design -->
 
-  <div class="hidden md:block">
+  <div class="hidden lg:block">
     <!-- header -->
     <div
-      class="bg-darkblue w-full h-40 flex items-center justify-center mt-[78px] mb-10"
+      class="bg-darkblue w-full h-36 flex items-center justify-center mt-24 mb-10"
     >
       <h1 class="font-Quattrocento text-[39px] text-creamywhite text-center">
         Your next book!
@@ -49,7 +52,7 @@
 
     <!-- main section -->
 
-    <div class="flex flex-row-reverse justify-center items-start mb-10">
+    <div class="flex flex-row-reverse justify-center items-start">
       <!-- book-info -->
       <div class="flex flex-col text-black font-RedHatDisplay mt-10">
         <p class="mb-6">
@@ -75,8 +78,38 @@
       </div>
 
       <!-- book summary -->
-      <div class="text-black font-RedHatDisplay mt-10">
-        <p class=""><strong>Summary:</strong> <br />{{ book.summary }}</p>
+      <div class="w-52 mt-10">
+        <p class="text-black font-RedHatDisplay">
+          <strong>Summary:</strong> <br />{{ book.summary }}
+        </p>
+      </div>
+    </div>
+
+    <!-- footer - desktop -->
+    <div class="flex justify-center space-x-[40rem] items-end mt-[-60px]">
+      <div class="right-icons">
+        <img
+          class="w-32 h-32"
+          src="../assets/icons/booksdarkred.png"
+          alt="red books"
+        />
+      </div>
+      <div class="left-icons flex items-end space-x-1">
+        <img
+          class="w-20 h-20"
+          src="../assets/icons/booksdarkred.png"
+          alt="red books"
+        />
+        <img
+          class="w-32 h-32"
+          src="../assets/icons/booksBlue.png"
+          alt="red books"
+        />
+        <img
+          class="w-20 h-20"
+          src="../assets/icons/booksdarkred.png"
+          alt="red books"
+        />
       </div>
     </div>
   </div>
