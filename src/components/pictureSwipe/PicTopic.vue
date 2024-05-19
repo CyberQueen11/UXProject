@@ -3,7 +3,7 @@
     <img
       class="m-4 hidden lg:block"
       v-if="!topicClicked"
-      src="..\..\assets\icons\ph_circle-thin.png"
+      src="..\..\assets\icons\image2.png"
       alt="circle"
     />
 
