@@ -32,7 +32,7 @@
         <RevealBookButton />
         <button
           class="btn btn-wide bg-indigo-600 text-white text-lg m-2 content-center"
-          @click="getBookBySubjectAndMore(genre, topic, location)"
+          @click="getBookBySubjectAndMore(genre, topic, location, time)"
         >
           Reveal book
         </button>
@@ -65,10 +65,10 @@ export default {
   data() {
     return {
       title: "Choose one image in each category",
-      genre: "",
-      topic: "",
-      location: "",
-      time: "",
+      genre: "love",
+      topic: "fiction",
+      location: "france",
+      time: "1800",
     };
   },
   methods: {
@@ -88,11 +88,17 @@ export default {
       this.time = word;
       console.log(this.time);
     },
-    async getBookBySubjectAndMore(genre, topic, place) {
+    async getBookBySubjectAndMore(genre, topic, place, time) {
       let resp = await fetch(
-        `https://openlibrary.org/search.json?subject=${genre}+${topic}+${place}+&fields=key,title,author_name&limit=1`
+        `https://openlibrary.org/search.json?subject=${genre}+${topic}+${place}&time=${time}&fields=key,title,author_name&limit=1`
       );
       let json = await resp.json();
+
+      if(json.num_found === 0){
+        console.log('Could not find a book that matches the preferences')
+        return
+      }
+
       let check = json.docs[0].title;
       console.log(check);
     },
