@@ -3,7 +3,7 @@
     <img
       class="m-4 hidden lg:block"
       v-if="!topicClicked"
-      src="..\..\assets\icons\ph_circle-thin.png"
+      src="..\..\assets\icons\image2.png"
       alt="circle"
     />
 
@@ -11,9 +11,9 @@
       class="m-4 hidden lg:block"
       v-else
       src="..\..\assets\icons\ph_circle-thin-1.png"
-      alt=""
+      alt="checked circle"
     />
-    <h2 class="mx-2 text-3xl font-quattrocento">{{ title }}</h2>
+    <h2 class="mx-2 text-3xl font-quattrocento font-bold lg:font-thin">{{ title }}</h2>
     <div @click="toggleChecked" class="carousel">
       <div class="carousel-item my-4 mx-1">
         <img

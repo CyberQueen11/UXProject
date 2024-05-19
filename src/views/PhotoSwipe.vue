@@ -11,22 +11,22 @@
     <img class="h-48 w-64" src="../assets/icons/Pic_swipe.png" alt="" />
 
     <div class="relative flex justify-center">
-      <p class="h-auto text-[16px] custom-text-blue font-redHatDisplay">
+      <p class="h-auto text-[16px] custom-text-blue font-redHatDisplay mb-14">
         {{ title }}
       </p>
     </div>
     <div class="m-4 flex flex-col items-center">
       <PicGenre @my-event="myGenre" />
-      <img class="m-4 lg:hidden" src="..\assets\icons\Streck.png" alt="line" />
+      <img class="m-4 lg:hidden mb-8" src="..\assets\icons\Streck.png" alt="line" />
 
       <PicTopic @my-event1="myTopic" />
-      <img class="m-4 lg:hidden" src="..\assets\icons\Streck.png" alt="line" />
+      <img class="m-4 lg:hidden mb-8" src="..\assets\icons\Streck.png" alt="line" />
 
       <PicLocation @my-event2="myLocation" />
-      <img class="m-4 lg:hidden" src="..\assets\icons\Streck.png" alt="line" />
+      <img class="m-4 lg:hidden mb-8" src="..\assets\icons\Streck.png" alt="line" />
 
       <PicTime @my-event3="myTime" />
-      <img class="m-4 lg:hidden" src="..\assets\icons\Streck.png" alt="line" />
+      <img class="m-4 lg:hidden mb-8" src="..\assets\icons\Streck.png" alt="line" />
 
       <div>
         <RevealBookButton />
