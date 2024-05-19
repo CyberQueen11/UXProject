@@ -7,5 +7,3 @@ import { RouterLink, RouterView } from "vue-router";
     <RouterView />
   </div>
 </template>
-
-<style scoped></style>

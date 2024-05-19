@@ -1,5 +1,5 @@
 <script>
-import ShowResult from "../../components/ShowResult.vue";
+import ShowResult from "../../views/ShowResult.vue";
 
 export default {
   components: {

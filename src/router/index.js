@@ -4,6 +4,7 @@ import JudgeTheBookByItsCover from "../views/JudgeTheBookByItsCover.vue";
 import PhotoSwipe from "../views/PhotoSwipe.vue";
 import OnceUponATime from "../views/OnceUponATime.vue";
 import About from "../views/About.vue";
+import ShowResult from "../views/ShowResult.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,12 @@ const router = createRouter({
       path: "/once-upon-a-time",
       name: "Once Upon A Time",
       component: OnceUponATime,
+    },
+    {
+      path: "/show-result",
+      name: "Show Result",
+      component: ShowResult,
+      props: (route) => ({ book: JSON.parse(route.query.book) }),
     },
   ],
 });
