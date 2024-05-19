@@ -26,6 +26,13 @@ export default {
           "romance",
           "science fiction",
           "thriller",
+          "horror",
+          "poetry",
+          "historical",
+          "mystery",
+          "short story",
+          "biography",
+          "memoir",
         ];
 
         const randomIndex = Math.floor(Math.random() * genres.length);
@@ -44,14 +51,15 @@ export default {
 
         this.books = [];
         for (const book of data.docs) {
+          const firstSentence = Array.isArray(book.first_sentence)
+            ? book.first_sentence[0]
+            : book.first_sentence;
           const newBook = {
             title: book.title,
             author: book.author_name ? book.author_name[0] : "Unknown",
             isbn: book.isbn ? book.isbn[0] : "Unknown",
             publish_year: book.publish_year ? book.publish_year[0] : "Unknown",
-            summary: book.first_sentence
-              ? book.first_sentence
-              : "No summary available",
+            summary: firstSentence ? firstSentence : "No summary available",
             language: book.language ? book.language[0] : "Unknown",
             pages: book.number_of_pages_median
               ? book.number_of_pages_median
