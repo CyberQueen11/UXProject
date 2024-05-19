@@ -6,14 +6,15 @@
       src="..\..\assets\icons\image2.png"
       alt="circle"
     />
-
     <img
       class="m-4 hidden lg:block"
       v-else
       src="..\..\assets\icons\ph_circle-thin-1.png"
       alt="checked circle"
     />
+
     <h2 class="mx-2 text-3xl font-quattrocento font-bold lg:font-thin">{{ title }}</h2>
+
     <div @click="toggleChecked" class="carousel">
       <div class="carousel-item my-4 mx-1">
         <img
@@ -60,6 +61,9 @@
         />
       </div>
     </div>
+
+    <img class="m-4 lg:hidden mb-8" src="..\..\assets\icons\Streck.png" alt="line" />
+    
   </div>
 </template>
 

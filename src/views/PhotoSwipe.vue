@@ -15,30 +15,26 @@
         {{ title }}
       </p>
     </div>
+
     <div class="m-4 flex flex-col items-center">
       <PicGenre @my-event="myGenre" />
-      <img class="m-4 lg:hidden mb-8" src="..\assets\icons\Streck.png" alt="line" />
-
       <PicTopic @my-event1="myTopic" />
-      <img class="m-4 lg:hidden mb-8" src="..\assets\icons\Streck.png" alt="line" />
-
       <PicLocation @my-event2="myLocation" />
-      <img class="m-4 lg:hidden mb-8" src="..\assets\icons\Streck.png" alt="line" />
-
       <PicTime @my-event3="myTime" />
-      <img class="m-4 lg:hidden mb-8" src="..\assets\icons\Streck.png" alt="line" />
-
+      
       <div>
         <RevealBookButton />
         <button
           class="btn btn-wide bg-indigo-600 text-white text-lg m-2 content-center"
-          @click="getBookBySubjectAndMore(genre, topic, location, time)"
+          @click="getBookBySubjectAndMore(genre, topic, location)"
         >
           Reveal book
         </button>
       </div>
     </div>
+
     <AboutButton />
+
   </div>
 </template>
 
@@ -60,7 +56,7 @@ export default {
     PicTime,
     HomeButton,
     AboutButton,
-    RevealBookButton,
+    RevealBookButton
   },
   data() {
     return {
@@ -68,7 +64,7 @@ export default {
       genre: "love",
       topic: "fiction",
       location: "france",
-      time: "1800",
+      time: "",
     };
   },
   methods: {
@@ -88,15 +84,15 @@ export default {
       this.time = word;
       console.log(this.time);
     },
-    async getBookBySubjectAndMore(genre, topic, place, time) {
+    async getBookBySubjectAndMore(genre, topic, place) {
       let resp = await fetch(
-        `https://openlibrary.org/search.json?subject=${genre}+${topic}+${place}&time=${time}&fields=key,title,author_name&limit=1`
+        `https://openlibrary.org/search.json?subject=${genre}+${topic}+${place}&limit=1`
       );
       let json = await resp.json();
 
-      if(json.num_found === 0){
-        console.log('Could not find a book that matches the preferences')
-        return
+      if (json.num_found === 0) {
+        console.log("Could not find a book that matches the preferences");
+        return;
       }
 
       let check = json.docs[0].title;
