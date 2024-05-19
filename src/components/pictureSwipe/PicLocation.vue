@@ -11,9 +11,9 @@
       class="m-4 hidden lg:block"
       v-else
       src="..\..\assets\icons\ph_circle-thin-1.png"
-      alt=""
+      alt="checked circle"
     />
-    <p class="mx-2 text-3xl font-quattrocento">{{ title }}</p>
+    <p class="mx-2 text-3xl font-quattrocento font-bold lg:font-thin">{{ title }}</p>
     <div @click="toggleChecked" class="carousel">
       <div class="carousel-item my-4 mx-1">
         <img
