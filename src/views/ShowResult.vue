@@ -78,7 +78,7 @@
       </div>
 
       <!-- book summary -->
-      <div class="w-40 mt-10">
+      <div class="w-[20vw] mt-10 mb-[12vw]">
         <p class="text-black font-RedHatDisplay">
           <strong>Summary:</strong> <br />{{ book.summary }}
         </p>

@@ -7,7 +7,7 @@ import BookCoverReveal from "./BookCoverReveal.vue";
 import RevealBookButton from "../general_components/RevealBookButton.vue";
 import { useCharacterStore } from "@/stores/CharacterStore";
 import { usePlaceStore } from "@/stores/PlaceStore";
-import { fetchData } from "./fetches/fetchData.js";
+import { fetchData } from "../general_components/fetchData.js";
 import { fetchSubjects } from "./fetches/fetchSubjects";
 import { fetchPlaces } from "./fetches/fetchPlaces";
 
@@ -45,6 +45,7 @@ export default {
         this.selectedEra,
         this.selectedCharacter,
         this.selectedPlace,
+        null,
         (newBook) => (this.book = newBook),
         (isFetching) => (this.fetching = isFetching)
       );
