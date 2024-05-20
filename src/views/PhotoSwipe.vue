@@ -23,7 +23,7 @@
       <PicTime @my-event3="myTime" />
       
       <div>
-        <RevealBookButton :book="picBook" label="Reveal book" :showButton="fetching"/>
+        <RevealBookButton :book="picBook" label="Reveal book" :showButton="showBook"/>
         <!-- <button
           class="btn btn-wide bg-indigo-600 text-white text-lg m-2 content-center"
           @click="getBookBySubjectAndMore(genre, topic, location)"
@@ -67,7 +67,8 @@ export default {
       location: "france",
       time: "",
       picBook: null,
-      fetching: false
+      showBook: false,
+      fetching: false,
     };
   },
   methods: {
@@ -91,7 +92,8 @@ export default {
         this.place,
         this.topic,
         (newBook) => (this.picBook = newBook),
-        (isFetching) => (this.fetching = isFetching)
+        (isFetching) => (this.fetching = isFetching),
+        (showBook) => (this.showBook = showBook)
       )
       console.log(this.time);
     },
