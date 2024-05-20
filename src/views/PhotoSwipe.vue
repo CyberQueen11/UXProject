@@ -23,13 +23,13 @@
       <PicTime @my-event3="myTime" />
       
       <div>
-        <RevealBookButton />
-        <button
+        <RevealBookButton :book="picBook"/>
+        <!-- <button
           class="btn btn-wide bg-indigo-600 text-white text-lg m-2 content-center"
           @click="getBookBySubjectAndMore(genre, topic, location)"
         >
           Reveal book
-        </button>
+        </button> -->
       </div>
     </div>
 
@@ -46,6 +46,7 @@ import PicTime from "../components/pictureSwipe/PicTime.vue";
 import HomeButton from "@/components/general_components/HomeButton.vue";
 import AboutButton from "@/components/general_components/AboutButton.vue";
 import RevealBookButton from "@/components/general_components/RevealBookButton.vue";
+import { fetchData } from "@/components/general_components/fetchData";
 
 export default {
   name: "App",
@@ -65,6 +66,8 @@ export default {
       topic: "fiction",
       location: "france",
       time: "",
+      picBook: null,
+      fetching: false
     };
   },
   methods: {
@@ -80,8 +83,16 @@ export default {
       this.location = word;
       console.log(this.location);
     },
-    myTime(word) {
+    async myTime(word) {
       this.time = word;
+      await fetchData(
+        this.time,
+        null,
+        this.place,
+        this.topic,
+        (newBook) => (this.picBook = newBook),
+        (isFetching) => (this.fetching = isFetching)
+      )
       console.log(this.time);
     },
     async getBookBySubjectAndMore(genre, topic, place) {
