@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { isMobile } from "../utils/isMobile";
 import Home from "../views/Home.vue";
+import HomeMobile from "../views/HomeMobile.vue";
 import JudgeTheBookByItsCover from "../views/JudgeTheBookByItsCover.vue";
 import PhotoSwipe from "../views/PhotoSwipe.vue";
 import OnceUponATime from "../views/OnceUponATime.vue";
@@ -14,7 +16,7 @@ const router = createRouter({
     {
       path: "/",
       name: "Home",
-      component: Home,
+      component: isMobile() ? HomeMobile : Home,
     },
     {
       path: "/about",
@@ -49,6 +51,17 @@ const router = createRouter({
       props: (route) => ({ book: JSON.parse(route.query.book) }),
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.path === "/") {
+    if (isMobile()) {
+      to.matched[0].components.default = HomeMobile;
+    } else {
+      to.matched[0].components.default = Home;
+    }
+  }
+  next()
 });
 
 export default router;
