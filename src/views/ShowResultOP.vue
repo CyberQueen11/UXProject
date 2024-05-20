@@ -44,11 +44,11 @@
   <div class="hidden lg:block">
     <!-- header -->
     <div class="w-full h-36 flex items-center justify-center mt-24 mb-10">
-      <img src="../assets/icons/Streck.png" alt="" />
+      <img src="../assets/icons/Streck.png" alt="line pic"  class="mr-[3vw] w-1/4"/>
       <h1 class="font-Quattrocento text-[39px] custom-text-blue text-center">
         Your next book!
       </h1>
-      <img src="../assets/icons/Streck.png" alt="" />
+      <img src="../assets/icons/Streck.png" alt="line pic" class="ml-[3vw] w-1/4"/>
     </div>
 
     <!-- main section -->
