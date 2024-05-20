@@ -8,6 +8,7 @@ export default {
   props: {
     book: Object,
     fetching: Boolean,
+    showButton: Boolean,
   },
 };
 </script>
@@ -21,7 +22,7 @@ export default {
       alt="book cover"
     />
 
-    <RevealBookButton :book="book" label="Go to book" />
+    <RevealBookButton :book="book" label="Go to book" :showButton="showButton"/>
   </div>
   <div
     v-else-if="fetching"

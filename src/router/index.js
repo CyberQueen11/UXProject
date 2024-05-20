@@ -5,6 +5,8 @@ import PhotoSwipe from "../views/PhotoSwipe.vue";
 import OnceUponATime from "../views/OnceUponATime.vue";
 import About from "../views/About.vue";
 import ShowResult from "../views/ShowResult.vue";
+import ShowResultOP from "../views/ShowResultOP.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +40,12 @@ const router = createRouter({
       path: "/show-result",
       name: "Show Result",
       component: ShowResult,
+      props: (route) => ({ book: JSON.parse(route.query.book) }),
+    },
+    {
+      path: "/show-result-op",
+      name: "Show Result OP",
+      component: ShowResultOP,
       props: (route) => ({ book: JSON.parse(route.query.book) }),
     },
   ],

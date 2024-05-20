@@ -29,6 +29,7 @@ export default {
       places: places,
       characterLoading: false,
       placeLoading: false,
+      showButton: true
     };
   },
 
@@ -47,7 +48,8 @@ export default {
         this.selectedPlace,
         null,
         (newBook) => (this.book = newBook),
-        (isFetching) => (this.fetching = isFetching)
+        (isFetching) => (this.fetching = isFetching),
+        (showButton) => (this.showButton = showButton)
       );
     },
 
@@ -143,10 +145,10 @@ export default {
     >
       Reveal the book
     </button>
-    <BookCoverReveal :book="book" :fetching="fetching" />
+    <BookCoverReveal :book="book" :fetching="fetching" :showButton="showButton"/>
   </div>
 
   <div class="lg:hidden">
-    <RevealBookButton :book="book" label="Reveal the book" />
+    <RevealBookButton :book="book" label="Reveal the book" :showButton="showButton"/>
   </div>
 </template>
