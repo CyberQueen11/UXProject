@@ -4,7 +4,8 @@ export async function fetchData(
   selectedPlace,
   selectedTopic,
   setBook,
-  setFetching
+  setFetching,
+  showBook,
 ) {
   const openlibrarySearchUrl = "https://openlibrary.org/search.json?";
   const LIMIT = 500;
@@ -69,6 +70,7 @@ export async function fetchData(
         }
 
         setFetching(false);
+        showBook(true)
       } else {
         console.log("No items found");
         setFetching(false);
