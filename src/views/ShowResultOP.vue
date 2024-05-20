@@ -5,7 +5,7 @@
     <!-- header -->
     <div class="bg-darkblue w-full h-36 flex items-center justify-center mt-24">
       <h1 class="font-Quattrocento text-[39px] text-creamywhite text-center">
-        Your next <br />
+        Your next <br>
         book!
       </h1>
     </div>

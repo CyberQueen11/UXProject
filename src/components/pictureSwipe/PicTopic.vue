@@ -60,6 +60,15 @@
           @click="$emit('myEvent1', 'war')"
         />
       </div>
+
+      <div class="carousel-item my-4 mx-1">
+        <img
+          class="cursor-pointer"
+          src="..\..\assets\Picture_swipe\Topic\future.png"
+          alt="pic"
+          @click="$emit('myEvent1', 'future')"
+        />
+      </div>
     </div>
 
     <img class="m-4 lg:hidden mb-8" src="..\..\assets\icons\Streck.png" alt="line" />

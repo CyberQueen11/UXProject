@@ -60,6 +60,15 @@
           @click="$emit('myEvent3', '1980')"
         />
       </div>
+
+      <div class="carousel-item my-4 mx-1">
+        <img
+          class="cursor-pointer"
+          src="..\..\assets\Picture_swipe\Time period\2000.png"
+          alt="pic"
+          @click="$emit('myEvent3', '2000')"
+        />
+      </div>
     </div>
 
     <img class="m-4 lg:hidden mb-8" src="..\..\assets\icons\Streck.png" alt="line" />

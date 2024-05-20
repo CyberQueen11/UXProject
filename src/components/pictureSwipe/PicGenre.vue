@@ -60,6 +60,16 @@
           @click="$emit('myEvent', 'thriller')"
         />
       </div>
+
+      <div class="carousel-item my-4 mx-1">
+        <img
+          class="cursor-pointer"
+          src="..\..\assets\Picture_swipe\Genre\space.png"
+          alt="pic"
+          @click="$emit('myEvent', 'space')"
+        />
+      </div>
+
     </div>
 
     <img class="m-4 lg:hidden mb-8" src="..\..\assets\icons\Streck.png" alt="line" />

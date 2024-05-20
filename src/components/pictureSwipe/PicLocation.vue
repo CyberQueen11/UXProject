@@ -57,7 +57,16 @@
           class="cursor-pointer"
           src="..\..\assets\Picture_swipe\Location\South america.png"
           alt="pic"
-          @click="$emit('myEvent2', 'america')"
+          @click="$emit('myEvent2', 'south america')"
+        />
+      </div>
+
+      <div class="carousel-item my-4 mx-1">
+        <img
+          class="cursor-pointer"
+          src="..\..\assets\Picture_swipe\Location\Australia.png"
+          alt="pic"
+          @click="$emit('myEvent2', 'austrailia')"
         />
       </div>
     </div>
