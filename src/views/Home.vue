@@ -1,5 +1,5 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink } from "vue-router";
 import AboutButton from "../components/general_components/AboutButton.vue"
 import BooksDecor from "../components/general_components/BooksDecor.vue"
 

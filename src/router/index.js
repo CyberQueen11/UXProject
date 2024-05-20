@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { isMobile } from "../utils/isMobile";
 import Home from "../views/Home.vue";
-import HomeMobile from "../views/HomeMobile.vue";
+import HomeStartMobile from "../views/HomeStartMobile.vue";
 import JudgeTheBookByItsCover from "../views/JudgeTheBookByItsCover.vue";
 import PhotoSwipe from "../views/PhotoSwipe.vue";
 import OnceUponATime from "../views/OnceUponATime.vue";
@@ -9,6 +9,7 @@ import About from "../views/About.vue";
 import ShowResult from "../views/ShowResult.vue";
 import ShowResultOP from "../views/ShowResultOP.vue";
 
+let isFirstLoad = true;
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,7 +17,21 @@ const router = createRouter({
     {
       path: "/",
       name: "Home",
-      component: isMobile() ? HomeMobile : Home,
+      component: Home,
+      beforeEnter: (to, from, next) => {
+        if (isFirstLoad) {
+          isFirstLoad = false; // Set flag to false after first load
+          if (isMobile()) {
+            return next({ name: "HomeStartMobile" }); // Redirect to HomeStartMobile on initial load
+          }
+        }
+        next();
+      },
+    },
+    {
+      path: "/home-start-mobile",
+      name: "HomeStartMobile",
+      component: HomeStartMobile,
     },
     {
       path: "/about",
@@ -51,17 +66,6 @@ const router = createRouter({
       props: (route) => ({ book: JSON.parse(route.query.book) }),
     },
   ],
-});
-
-router.beforeEach((to, from, next) => {
-  if (to.path === "/") {
-    if (isMobile()) {
-      to.matched[0].components.default = HomeMobile;
-    } else {
-      to.matched[0].components.default = Home;
-    }
-  }
-  next()
 });
 
 export default router;
