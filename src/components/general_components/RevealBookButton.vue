@@ -7,7 +7,8 @@ export default {
 
   props: {
     book: Object,
-    label: String
+    label: String,
+    showButton: Boolean
   },
 };
 </script>
@@ -20,6 +21,14 @@ export default {
       type="button"
       class="btn btn-md md:btn-md lg:btn-lg mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento w-auto"
       :value="label"
+      v-if="showButton"
+    />
+    <input
+    disabled
+      type="button"
+      class="btn btn-md md:btn-md lg:btn-lg mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento w-auto"
+      :value="label"
+      v-else
     />
   </RouterLink>
 </template>
