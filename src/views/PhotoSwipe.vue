@@ -46,7 +46,7 @@ import PicTime from "../components/pictureSwipe/PicTime.vue";
 import HomeButton from "@/components/general_components/HomeButton.vue";
 import AboutButton from "@/components/general_components/AboutButton.vue";
 import RevealBookButton from "@/components/general_components/RevealBookButton.vue";
-import { fetchData } from "@/components/general_components/fetchData";
+import { fetchData } from "@/utils/fetchData";
 
 export default {
   name: "App",
@@ -69,6 +69,7 @@ export default {
       picBook: null,
       showBook: false,
       fetching: false,
+      mobileButton: false,
     };
   },
   methods: {
@@ -93,7 +94,8 @@ export default {
         this.topic,
         (newBook) => (this.picBook = newBook),
         (isFetching) => (this.fetching = isFetching),
-        (showBook) => (this.showBook = showBook)
+        (showBook) => (this.showBook = showBook),
+        (mobileButton) => (this.mobileButton = mobileButton),
       )
       console.log(this.time);
     },

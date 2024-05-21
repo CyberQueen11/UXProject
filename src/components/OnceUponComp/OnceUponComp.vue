@@ -7,7 +7,7 @@ import BookCoverReveal from "./BookCoverReveal.vue";
 import RevealBookButton from "../general_components/RevealBookButton.vue";
 import { useCharacterStore } from "@/stores/CharacterStore";
 import { usePlaceStore } from "@/stores/PlaceStore";
-import { fetchData } from "../general_components/fetchData.js";
+import { fetchData } from "../../utils/fetchData.js";
 import { fetchSubjects } from "./fetches/fetchSubjects";
 import { fetchPlaces } from "./fetches/fetchPlaces";
 
@@ -29,10 +29,10 @@ export default {
       places: places,
       characterLoading: false,
       placeLoading: false,
-      showButton: true
+      showButton: true,
+      mobileButton: true,
     };
   },
-
   setup() {
     const characterStore = useCharacterStore();
     const placeStore = usePlaceStore();
@@ -49,12 +49,14 @@ export default {
         null,
         (newBook) => (this.book = newBook),
         (isFetching) => (this.fetching = isFetching),
-        (showButton) => (this.showButton = showButton)
+        (showButton) => (this.showButton = showButton),
+        (mobileButton) => (this.mobileButton = mobileButton),
       );
     },
 
     async handleEraSelection(selectedValue) {
       this.selectedEra = selectedValue;
+      this.mobileButton = false;
       try {
         this.characterLoading = true;
         // Call the API to get subjects based on the selected era
@@ -76,9 +78,11 @@ export default {
         // Handle error if fetchSubjects fails
       }
       this.characterLoading = false;
+      this.mobileButton = true;
     },
 
     async handleCharacterSelection(selectedValue) {
+      this.mobileButton = false;
       this.selectedCharacter = selectedValue;
       this.placeLoading = true;
       const placeSet = await fetchPlaces(this.selectedEra, selectedValue);
@@ -101,6 +105,7 @@ export default {
       this.placeStore.updatePlaces(placesList);
 
       this.placeLoading = false;
+      this.mobileButton = true;
     },
 
     handlePlaceSelection(selectedValue) {
@@ -129,11 +134,23 @@ export default {
   />
 
   <SelectDropdown
+    class="hidden lg:block"
     label="Who lived in "
     placeholder="Pick a place"
     :items="placeStore.places"
     v-model="selectedPlace"
     @update:selected="handlePlaceSelection"
+    :placeLoading="placeLoading || characterLoading"
+  />
+
+  <!-- mobile version that should fetchdata immediately -->
+  <SelectDropdown
+    class="lg:hidden"
+    label="Who lived in "
+    placeholder="Pick a place"
+    :items="placeStore.places"
+    v-model="selectedPlace"
+    @update:selected="fetchData"
     :placeLoading="placeLoading || characterLoading"
   />
 
@@ -145,10 +162,18 @@ export default {
     >
       Reveal the book
     </button>
-    <BookCoverReveal :book="book" :fetching="fetching" :showButton="showButton"/>
+    <BookCoverReveal
+      :book="book"
+      :fetching="fetching"
+      :showButton="showButton"
+    />
   </div>
 
   <div class="lg:hidden">
-    <RevealBookButton :book="book" label="Reveal the book" :showButton="showButton"/>
+    <RevealBookButton
+      :book="book"
+      label="Reveal the book"
+      :mobileButton="mobileButton"
+    />
   </div>
 </template>
