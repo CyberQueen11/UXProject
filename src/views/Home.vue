@@ -32,7 +32,7 @@ export default {
   <!-- app links -->
   <main>
     <div
-      class="flex flex-col items-center lg:flex-row lg:mt-20 my-16 lg:mb-32 lg:justify-center lg:space-x-32 xlg:space-x-52"
+      class="flex flex-col items-center lg:flex-row lg:mt-20 my-16 lg:mb-32 lg:justify-center lg:space-x-[5.5rem]"
     >
       <!-- judge the book by its cover -->
       <div class="app-link">
