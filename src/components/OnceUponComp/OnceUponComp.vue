@@ -31,6 +31,7 @@ export default {
       placeLoading: false,
       showButton: true,
       mobileButton: true,
+      noItemsText: null,
     };
   },
   setup() {
@@ -51,7 +52,8 @@ export default {
         (newBook) => (this.book = newBook),
         (isFetching) => (this.fetching = isFetching),
         (showButton) => (this.showButton = showButton), // Update button visibility
-        (mobileButton) => (this.mobileButton = mobileButton) // Update mobile button visibility
+        (mobileButton) => (this.mobileButton = mobileButton), // Update mobile button visibility
+        (noItemsText) => (this.noItemsText = noItemsText)
       );
     },
 
