@@ -134,7 +134,7 @@ export default {
     :items="placeStore.places"
     v-model="selectedPlace"
     @update:selected="handlePlaceSelection"
-    :placeLoading="placeLoading"
+    :placeLoading="placeLoading || characterLoading"
   />
 
   <!-- DESKTOP reveal button -->

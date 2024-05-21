@@ -104,7 +104,7 @@
         <img
           class="w-32 h-32"
           src="../assets/icons/booksBlue.png"
-          alt="red books"
+          alt="blue books"
         />
         <img
           class="w-20 h-20"
@@ -114,14 +114,17 @@
       </div>
     </div>
   </div>
+  <AboutButton />
 </template>
 
 <script>
 import HomeButton from "@/components/general_components/HomeButton.vue";
+import AboutButton from "@/components/general_components/AboutButton.vue";
 
 export default {
   components: {
     HomeButton,
+    AboutButton,
   },
   props: {
     book: {
