@@ -17,6 +17,7 @@ export default {
     this.getBooks();
   },
   methods: {
+    // Asynchronously fetches books from the Open Library API based on a random genre.
     async getBooks() {
       try {
         const genres = [
@@ -37,8 +38,10 @@ export default {
 
         const randomIndex = Math.floor(Math.random() * genres.length);
         const randomGenre = genres[randomIndex];
+
         const offset = Math.floor(Math.random() * 1000);
 
+        // Fetch books data from the Open Library API using the random genre and offset.
         const response = await fetch(
           `https://openlibrary.org/search.json?q=${randomGenre}&limit=10&offset=${offset}`
         );
@@ -50,6 +53,7 @@ export default {
         const data = await response.json();
 
         this.books = [];
+
         for (const book of data.docs) {
           const firstSentence = Array.isArray(book.first_sentence)
             ? book.first_sentence[0]
@@ -65,7 +69,10 @@ export default {
               ? book.number_of_pages_median
               : "Unknown",
           };
+
+          // Check if the book cover exists.
           const coverExists = await this.checkCoverExists(newBook.isbn);
+
           if (this.books.length < 3 && coverExists) {
             this.books.push(newBook);
           }
@@ -74,20 +81,26 @@ export default {
         console.error("Error fetching books:", error);
       }
     },
+
+    // Asynchronously checks if a book cover exists for a given ISBN.
     async checkCoverExists(isbn) {
       try {
         const response = await fetch(
           `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg?default=false`
         );
+
         return response.ok;
       } catch (error) {
         console.error(error);
         return false;
       }
     },
+
+    // Selects a book from the fetched books and manages the selected books list.
     selectBook(book) {
       this.selectedBook.push(book.isbn);
       this.candidates.push(book);
+
       if (this.selectedBook.length >= 3) {
         this.bookToReveal =
           this.candidates[Math.floor(Math.random() * this.candidates.length)];
@@ -103,7 +116,6 @@ export default {
 <template>
   <ShowResult v-if="bookToReveal" :book="bookToReveal"></ShowResult>
   <div v-else>
-    <!-- Main template content -->
     <header>
       <!-- mobile -->
       <div class="block lg:hidden">
