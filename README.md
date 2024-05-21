@@ -1,6 +1,8 @@
-# vue-project
+# project-description
 
-This template should help get you started developing with Vue 3 in Vite.
+A project to give the user a random book depending on their choices including 3 different apps, Picture Swipe, Judge The Book, Once Upon A Time.
+API - OpenLibrary
+
 
 ## Recommended IDE Setup
 
