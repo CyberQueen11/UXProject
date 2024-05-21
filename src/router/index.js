@@ -58,12 +58,20 @@ const router = createRouter({
       name: "Show Result",
       component: ShowResult,
       props: (route) => ({ book: JSON.parse(route.query.book) }),
+      beforeEnter: (to, from, next) => {
+        window.scrollTo(0, 0); // Reset scroll position
+        next();
+      },
     },
     {
       path: "/show-result-op",
       name: "Show Result OP",
       component: ShowResultOP,
       props: (route) => ({ book: JSON.parse(route.query.book) }),
+      beforeEnter: (to, from, next) => {
+        window.scrollTo(0, 0); // Reset scroll position
+        next();
+      },
     },
   ],
 });
