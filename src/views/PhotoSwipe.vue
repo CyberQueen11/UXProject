@@ -22,7 +22,10 @@
       <PicLocation @my-event2="myLocation" />
       <PicTime @my-event3="myTime" />
       
-      <div>
+      <div v-if="noItemsText">
+        <p>{{ noItemsText }}</p>
+      </div>
+      <div v-else>
         <RevealBookButton :book="picBook" label="Reveal book" :showButton="showBook"/>
       </div>
     </div>
@@ -63,6 +66,7 @@ export default {
       picBook: null,
       showBook: false,
       fetching: false,
+      noItemsText: null
     };
   },
   methods: {
@@ -89,6 +93,7 @@ export default {
         (isFetching) => (this.fetching = isFetching),
         (showBook) => (this.showBook = showBook),
         (mobileButton) => (this.mobileButton = mobileButton),
+        (noItemsText) => (this.noItemsText = noItemsText),
       )
       console.log(this.time);
     },

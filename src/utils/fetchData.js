@@ -6,7 +6,8 @@ export async function fetchData(
   setBook,
   setFetching,
   showBook,
-  mobileButton
+  mobileButton,
+  noItemsText
 ) {
   const openlibrarySearchUrl = "https://openlibrary.org/search.json?";
   const LIMIT = 500;
@@ -14,6 +15,7 @@ export async function fetchData(
   let numFound = 0;
   let maxSearchNum = 5000;
 
+  noItemsText("")
   mobileButton(false);
   setBook(null);
   setFetching(true);
@@ -75,6 +77,7 @@ export async function fetchData(
         showBook(true);
         mobileButton(true);
       } else {
+        noItemsText("No items found")
         console.log("No items found");
         setFetching(false);
         return;

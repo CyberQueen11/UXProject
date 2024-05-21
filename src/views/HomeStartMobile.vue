@@ -4,10 +4,10 @@ import { RouterLink } from "vue-router";
 
 <template>
   <header></header>
-  <main>
+  <main class="bg-[url('../assets/background/Startsida.png')]">
     <div class="grid grid-cols gap-4 justify-items-center h-screen">
-      <div class="center-item w-[230px]">
-        <img src="../assets/icons/Logo.svg" alt="" />
+      <div class="center-item w-[230px] h-[180px] mt-[200px]">
+        <img src="../assets/icons/startbook.png" alt="Start book"/>
       </div>
       <RouterLink :to="{ name: 'Home' }">
         <button
@@ -22,6 +22,6 @@ import { RouterLink } from "vue-router";
 
 <style scoped>
 .center-item {
-  @apply flex justify-center;
+  @apply flex justify-center items-center;
 }
 </style>
