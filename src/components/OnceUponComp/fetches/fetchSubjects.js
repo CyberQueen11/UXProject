@@ -1,3 +1,4 @@
+// Function to fetch subjects based on the selected era
 export async function fetchSubjects(selectedEra) {
   const subjectSet = new Set();
   const openlibraryURL = "https://openlibrary.org/search.json?";
@@ -7,7 +8,7 @@ export async function fetchSubjects(selectedEra) {
   let maxSearchNum = 1000;
 
   while (offset < maxSearchNum) {
-    console.log("Fetching subjects...")
+    console.log("Fetching subjects...");
     let eraURL = `${openlibraryURL}language=eng&limit=${LIMIT}&offset=${offset}&time=${selectedEra}`;
 
     let resp = await fetch(eraURL);

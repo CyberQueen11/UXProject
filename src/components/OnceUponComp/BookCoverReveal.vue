@@ -13,27 +13,28 @@ export default {
 };
 </script>
 <template>
-  <div
-    v-if="book"
-    class="w-5/6 placement"
-  >
+  <!-- Display book cover and button if book object is available -->
+  <div v-if="book" class="w-5/6 placement">
     <img
       :src="'https://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'"
       alt="book cover"
     />
 
-    <RevealBookButton :book="book" label="Go to book" :showButton="showButton"/>
+    <!-- RevealBookButton component to navigate to the book -->
+    <RevealBookButton
+      :book="book"
+      label="Go to book"
+      :showButton="showButton"
+    />
   </div>
-  <div
-    v-else-if="fetching"
-    class="w-[170px] h-[250px] placement p-3"
-  >
+
+  <!-- Display loading message if data is being fetched -->
+  <div v-else-if="fetching" class="w-[170px] h-[250px] placement p-3">
     <p>Loading...</p>
   </div>
-  <div
-    v-else
-    class="w-[170px] h-[250px] placement border border-black p-3"
-  >
+
+  <!-- Display placeholder message if no book is selected and not fetching -->
+  <div v-else class="w-[170px] h-[250px] placement border border-black p-3">
     <p class="font-redHatDisplay custom-lightblue text-[1.2vw]">
       Your next book <br />
       will be revealed here !
@@ -42,6 +43,8 @@ export default {
 </template>
 
 <style scoped>
+
+/* Positioning class for the book display */
 .placement {
   top: -3vw;
   left: 31vw;

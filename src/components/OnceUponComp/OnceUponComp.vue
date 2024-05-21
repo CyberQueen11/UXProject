@@ -41,6 +41,7 @@ export default {
   },
 
   methods: {
+    // Method to fetch data based on selections
     async fetchData() {
       await fetchData(
         this.selectedEra,
@@ -49,8 +50,8 @@ export default {
         null,
         (newBook) => (this.book = newBook),
         (isFetching) => (this.fetching = isFetching),
-        (showButton) => (this.showButton = showButton),
-        (mobileButton) => (this.mobileButton = mobileButton),
+        (showButton) => (this.showButton = showButton), // Update button visibility
+        (mobileButton) => (this.mobileButton = mobileButton) // Update mobile button visibility
       );
     },
 
@@ -89,7 +90,7 @@ export default {
 
       let placesList = this.placeStore.places;
 
-      //Empty list
+      // Clear the place list
       placesList.splice(0, placesList.length);
 
       const placesWithLabel = Array.from(placeSet).map((place) => ({
@@ -116,6 +117,7 @@ export default {
 </script>
 
 <template>
+  <!-- Dropdown for selecting an era -->
   <SelectDropdown
     label="Once upon a time in the era of "
     placeholder="Pick an era"
@@ -124,6 +126,7 @@ export default {
     @update:selected="handleEraSelection"
   />
 
+  <!-- Dropdown for selecting a character -->
   <SelectDropdown
     label="There was a "
     placeholder="Pick your character"
@@ -133,6 +136,7 @@ export default {
     :characterLoading="characterLoading"
   />
 
+  <!-- Dropdown for selecting a place, hidden on mobile -->
   <SelectDropdown
     class="hidden lg:block"
     label="Who lived in "
@@ -143,7 +147,7 @@ export default {
     :placeLoading="placeLoading || characterLoading"
   />
 
-  <!-- mobile version that should fetchdata immediately -->
+  <!-- Dropdown for selecting a place, visible on mobile and fetch data immediately -->
   <SelectDropdown
     class="lg:hidden"
     label="Who lived in "
@@ -162,6 +166,7 @@ export default {
     >
       Reveal the book
     </button>
+    <!-- Component to reveal the book cover -->
     <BookCoverReveal
       :book="book"
       :fetching="fetching"
@@ -169,6 +174,7 @@ export default {
     />
   </div>
 
+  <!-- Reveal button for mobile -->
   <div class="lg:hidden">
     <RevealBookButton
       :book="book"
