@@ -1,3 +1,5 @@
+<!-- circle with numbers get filled in when user clicks a picture -->
+
 <template>
   <div class="flex flex-col items-center">
     <img
@@ -14,6 +16,8 @@
     />
 
     <p class="mx-2 text-3xl font-quattrocento font-bold lg:font-thin">{{ title }}</p>
+
+    <!-- carousel with pictures to click -->
 
     <div @click="toggleChecked" class="carousel">
       <div class="carousel-item my-4 mx-1">

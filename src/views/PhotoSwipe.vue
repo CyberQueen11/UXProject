@@ -1,3 +1,5 @@
+<!-- head-page for pictureswipe with all the components -->
+
 <template>
   <div class="flex flex-col items-center">
     <HomeButton class="m-4" />
@@ -15,6 +17,8 @@
         {{ title }}
       </p>
     </div>
+
+    <!-- components that recevies the serach-parameters -->
 
     <div class="m-4 flex flex-col items-center">
       <PicGenre @my-event="myGenre" />
@@ -34,6 +38,8 @@
 
   </div>
 </template>
+
+<!-- imports -->
 
 <script>
 import PicGenre from "../components/pictureSwipe/PicGenre.vue";
