@@ -70,3 +70,7 @@
 .custom-lightblue {
   color: #102C57;
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}

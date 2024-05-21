@@ -91,7 +91,7 @@
           <strong>Summary:</strong>
         </p>
         <div class="max-h-40 overflow-scroll">
-          <p class="text-black font-RedHatDisplay overflow-scroll">
+          <p class="text-black font-RedHatDisplay">
             {{ book.summary }}
           </p>
         </div>
