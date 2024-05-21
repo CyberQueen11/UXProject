@@ -25,7 +25,14 @@
     <div
       class="flex flex-col items-start text-black text-[18px] font-RedHatDisplay w-4/6"
     >
-      <p class="mb-6"><strong>Summary:</strong> <br />{{ book.summary }}</p>
+      <p class="text-black font-RedHatDisplay">
+        <strong>Summary:</strong>
+      </p>
+      <div class="overflow-scroll max-h-32">
+        <p class="text-black font-RedHatDisplay">
+          {{ book.summary }}
+        </p>
+      </div>
       <p class="mb-6">
         <strong>Title:</strong> {{ book.title }}<br />
         <strong>By:</strong> {{ book.author }}
@@ -79,10 +86,15 @@
       </div>
 
       <!-- book summary -->
-      <div class="w-[12vw] mt-10 mb-[12vw]">
+      <div class="max-w-[12vw] max-h-40 mt-10 mb-[12vw]">
         <p class="text-black font-RedHatDisplay">
-          <strong>Summary:</strong> <br />{{ book.summary }}
+          <strong>Summary:</strong>
         </p>
+        <div class="max-h-40 overflow-scroll">
+          <p class="text-black font-RedHatDisplay overflow-scroll">
+            {{ book.summary }}
+          </p>
+        </div>
       </div>
     </div>
 
