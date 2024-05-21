@@ -24,12 +24,6 @@
       
       <div>
         <RevealBookButton :book="picBook" label="Reveal book" :showButton="showBook"/>
-        <!-- <button
-          class="btn btn-wide bg-indigo-600 text-white text-lg m-2 content-center"
-          @click="getBookBySubjectAndMore(genre, topic, location)"
-        >
-          Reveal book
-        </button> -->
       </div>
     </div>
 
@@ -69,7 +63,6 @@ export default {
       picBook: null,
       showBook: false,
       fetching: false,
-      mobileButton: false,
     };
   },
   methods: {
@@ -99,20 +92,7 @@ export default {
       )
       console.log(this.time);
     },
-    // async getBookBySubjectAndMore(genre, topic, place) {
-    //   let resp = await fetch(
-    //     `https://openlibrary.org/search.json?subject=${genre}+${topic}+${place}&limit=1`
-    //   );
-    //   let json = await resp.json();
 
-    //   if (json.num_found === 0) {
-    //     console.log("Could not find a book that matches the preferences");
-    //     return;
-    //   }
-
-    //   let check = json.docs[0].title;
-    //   console.log(check);
-    // },
   },
 };
 </script>

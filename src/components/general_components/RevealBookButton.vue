@@ -28,7 +28,7 @@ export default {
       type="button"
       class="btn btn-md md:btn-md lg:btn-lg mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento w-auto"
       :value="label"
-      v-if="mobileButton"
+      v-else-if="mobileButton"
     />
     <input
     disabled
