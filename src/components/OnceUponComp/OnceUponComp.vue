@@ -164,10 +164,19 @@ export default {
   <div class="hidden lg:block">
     <button
       class="btn btn-md md:btn-md lg:btn-lg mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento"
+      v-if="characterLoading || placeLoading"
+      disabled
+    >
+      Reveal the book
+    </button>
+    <button
+      class="btn btn-md md:btn-md lg:btn-lg mt-[5vw] lg:mt-[1vw] custom-bg-red text-white font-quattrocento"
+      v-else
       @click="fetchData"
     >
       Reveal the book
     </button>
+    
     <!-- Component to reveal the book cover -->
     <BookCoverReveal
       :book="book"
